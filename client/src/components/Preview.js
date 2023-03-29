@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from 'react'
 
 import { marked } from 'marked';
 import parse from 'html-react-parser';
