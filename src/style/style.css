@@ -53,3 +53,15 @@ textarea {
   padding: 15px;
 
 }
+
+.preview :is(h1, h2, h3, h4, h5, h6) {
+  color: rgb(208, 118, 133);
+}
+
+.preview :is(code) {
+  color: black;
+  display: flex;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background: rgb(196, 193, 193);
+}

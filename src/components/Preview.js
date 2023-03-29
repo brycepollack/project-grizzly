@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 const Preview = ({input}) => {
 
 	return (
-		<div className="text-display">
+		<div className="preview text-display">
             {parse(marked.parse(input))}
 		</div>
 	)
