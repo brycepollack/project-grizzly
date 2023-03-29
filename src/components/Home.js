@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Home = ({ isDev }) => {
+import Editor from "./Editor";
+
+const Home = () => {
 	return (
 		<div className="parent-container">
-			<div className="container">
-				Nothing to see here! Just a box
-			</div>
+			<Editor />
 		</div>
 	)
 }
