@@ -23,21 +23,21 @@ const Home = () => {
 	}
 
 	const fetchAllNotes = async () => {
-		const res = await fetch('http://localhost:5000/notes')
+		const res = await fetch('http://localhost:8080/notes')
 		const data = await res.json()
 	
 		return data
 	}
 
 	const fetchSpecificNote = async (id) => {
-		const res = await fetch(`http://localhost:5000/notes/${id}`)
+		const res = await fetch(`http://localhost:8080/notes/${id}`)
 		const data = await res.json()
 	
 		return data
 	}
 
 	const addNote = async (note) => {
-		const res = await fetch('http://localhost:5000/notes', {
+		const res = await fetch('http://localhost:8080/notes', {
 		  method: 'POST',
 		  headers: {
 			'Content-type': 'application/json',
@@ -52,7 +52,7 @@ const Home = () => {
 	}
 
 	const deleteNote = async (id) => {
-		const res = await fetch(`http://localhost:5000/notes/${id}`, {
+		const res = await fetch(`http://localhost:8080/notes/${id}`, {
 		  method: 'DELETE',
 		})
 		//We should control the response status to decide if we will change the state or not.
@@ -62,7 +62,7 @@ const Home = () => {
 	}
 
 	const editNote = async (id) => {
-		const res = await fetch(`http://localhost:5000/notes/${id}`, {
+		const res = await fetch(`http://localhost:8080/notes/${id}`, {
 		  method: 'DELETE',
 		})
 		//We should control the response status to decide if we will change the state or not.

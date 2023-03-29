@@ -20,7 +20,7 @@ const AddNote = ({ onAdd }) => {
   }
 
   const addNote = async (note) => {
-    const res = await fetch('http://localhost:5000/notes', {
+    const res = await fetch('http://localhost:8080/notes', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
