@@ -1,5 +1,7 @@
 const { notes } = require('../sampleData.js');
 
+const Note = require('../models/Note');
+
 const {
     GraphQLObjectType,
     GraphQLID,
@@ -26,19 +28,68 @@ const RootQuery = new GraphQLObjectType({
       notes: {
         type: new GraphQLList(NoteType),
         resolve(parent, args) {
-          return notes;
+          // return notes;
+          return Note.find();
         },
       },
       note: {
         type: NoteType,
         args: { id: { type: GraphQLID } },
         resolve(parent, args) {
-          return notes.find(note => note.id === args.id);
+          // return notes.find(note => note.id === args.id);
+          return Notes.findById(args.id);
         },
       },
     },
 });
 
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    // Add Note
+    addNote: {
+      type: NoteType,
+      args: {
+        title: { type: GraphQLNonNull(GraphQLString) },
+        text: { type: GraphQLString}
+      },
+      resolve(parent, args) {
+        const note = new Note({
+          title: args.title,
+          text: args.text
+        });
+
+        return note.save();
+      }
+    },
+
+    // Delete Note
+    deleteNote: {
+      type: NoteType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) }
+      },
+      resolve(parent, args) {
+        return Note.findByIdAndRemove(args.id);
+      }
+    },
+
+    // Edit Note
+    editNote: {
+      type: NoteType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        title: { type: GraphQLNonNull(GraphQLString) },
+        text: { type: GraphQLString}
+      },
+      resolve(parent, args) {
+        return Note.findByIdAndUpdate(args.id, { title: args.title, text: args.text} );
+      }
+    }
+  }
+});
+
 module.exports = new GraphQLSchema({
-    query: RootQuery
+    query: RootQuery,
+    mutation
   });
