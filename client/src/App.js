@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { BrowserRouter, Switch, Route, Link, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import AddNote from "./components/AddNote";
+import NoteEditor from "./components/NoteEditor";
 
 const App = () => {
 
@@ -10,7 +10,7 @@ const App = () => {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/AddNote" element={<AddNote />} />
+				<Route path="/NoteEditor" element={<NoteEditor />} />
 			</Routes>
 		</BrowserRouter>
 	);

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import Editor from "./Editor";
 import Notes from './Notes'
-import AddNote from './AddNote'
+import AddNote from './NoteEditor'
 import Button from './Button'
 
 const Home = () => {
@@ -56,9 +56,9 @@ const Home = () => {
 		  method: 'DELETE',
 		})
 		//We should control the response status to decide if we will change the state or not.
-		//res.status === 200
-		//  ? setNotes(notes.filter((note) => note.id !== id))
-		//  : alert('Error Deleting This Note')
+		// res.status === 200
+		//   ? setNotes(notes.filter((note) => note.id !== id))
+		//   : alert('Error Deleting This Note')
 	}
 
 	const editNote = async (id) => {
@@ -66,9 +66,9 @@ const Home = () => {
 		  method: 'DELETE',
 		})
 		//We should control the response status to decide if we will change the state or not.
-		res.status === 200
-		  ? setNotes(notes.filter((note) => note.id !== id))
-		  : alert('Error Deleting This Note')
+		// res.status === 200
+		//   ? setNotes(notes.filter((note) => note.id !== id))
+		//   : alert('Error Deleting This Note')
 	}
 
 	return (
@@ -82,7 +82,7 @@ const Home = () => {
             ) : (
                 'No Tasks To Show'
             )}
-			<a href='/AddNote'>Add Note</a>
+			<a href='/NoteEditor'>Add Note</a>
 		</div>
 	)
 }

@@ -8,6 +8,7 @@ const Editor = () => {
 
 	return (
 		<div className="editor">
+            
 
 			<div className="editor-child border rounded">
                 <textarea
