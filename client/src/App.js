@@ -1,16 +1,11 @@
-import { useState, useEffect } from 'react'
-
-import { BrowserRouter, Switch, Route, Link, Routes } from "react-router-dom";
-import Editor from './components/Editor';
-import Header from './components/Header';
-import Home from "./components/Home";
-import NoteEditor from "./components/NoteEditor";
-
 import React from 'react';
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Notes from './components/Notes.jsx';
+import Header from './components/Header';
+import Home from './pages/Home';
+import NoteEditor from './pages/NoteEditor';
 
 const cache = new InMemoryCache({
 	typePolicies: {
@@ -36,19 +31,18 @@ const App = () => {
 	return (
 		<>
 			<ApolloProvider client={client}>
-				<Header />
-				<div className='container'>
-					<Notes />
-				</div>
+				<Router>
+					<Header />
+					<div className='container'>
+						<Routes>
+							<Route path='/' element={<Home />} />
+							<Route path='/notes/:id' element={<NoteEditor />} />
+						</Routes>
+					</div>
+				</Router>
 			</ApolloProvider>
 		</>
-		// <BrowserRouter>
-		// 	<Routes>
-		// 		<Route path="/" element={<Home />} />
-		// 		<Route path="/NoteEditor" element={<NoteEditor />} />
-		// 		<Route path="/" element={ <><Header /> <Editor /></>} />
-		// 	</Routes>
-		// </BrowserRouter>
+		
 	);
 };
 

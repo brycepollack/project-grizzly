@@ -8,6 +8,16 @@ const GET_NOTES = gql`
             text
         }
     }
-`
+`;
 
-export {GET_NOTES};
+const GET_NOTE = gql`
+  query getNote($id: ID!) {
+    note(id: $id) {
+      id
+      title
+      text
+    }
+  }
+`;
+
+export {GET_NOTES, GET_NOTE};

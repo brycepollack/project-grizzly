@@ -1,4 +1,4 @@
-import { FaTrash } from 'react-icons/fa'
+import { FaTrash, FaEdit } from 'react-icons/fa'
 import { useMutation } from '@apollo/client';
 import { DELETE_NOTE } from '../mutations/noteMutations';
 import { GET_NOTES } from '../queries/noteQueries';
@@ -20,6 +20,12 @@ export default function NoteRow({ note }) {
         <tr>
             <td>{ note.title }</td>
             <td>{ note.text }</td>
+            <td>
+                <a className="btn btn-success btn-sm"
+                href={`/notes/${note.id}`}>
+                    <FaEdit />
+                </a>
+            </td>
             <td>
                 <button className="btn btn-danger btn-sm"
                 onClick={deleteNote}>

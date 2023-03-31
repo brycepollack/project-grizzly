@@ -37,7 +37,7 @@ const RootQuery = new GraphQLObjectType({
         args: { id: { type: GraphQLID } },
         resolve(parent, args) {
           // return notes.find(note => note.id === args.id);
-          return Notes.findById(args.id);
+          return Note.findById(args.id);
         },
       },
     },
@@ -74,8 +74,8 @@ const mutation = new GraphQLObjectType({
       }
     },
 
-    // Edit Note
-    editNote: {
+    // Update Note
+    updateNote: {
       type: NoteType,
       args: {
         id: { type: GraphQLNonNull(GraphQLID) },

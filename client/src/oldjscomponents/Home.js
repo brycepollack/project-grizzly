@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import Editor from "./Editor";
-import Notes from './Notes'
+import Notes from '../components/Notes'
 import AddNote from './NoteEditor'
 import Button from './Button'
 
