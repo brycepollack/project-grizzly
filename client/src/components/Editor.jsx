@@ -14,40 +14,50 @@ export default function Editor({ note }) {
   });
 
   const onSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
 
-    // if (!name || !description || !status) {
-    //   return alert("Please fill out all fields");
-    // }
+    if (!title) {
+      return alert("Please fill out title");
+    }
 
     updateNote(title, text);
   };
 
   return (
-    <div className="editor">
-    
-			<div className="editor-child border rounded">
-                <textarea
-                    className="text-display"
-                    style={{resize: "none"}}
-                    id="input"
-                    type="text"
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                />
-			</div>
+    <>
+      <div>
+        <h6>Title: </h6>
+        <textarea
+          className="input-block-level"
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
+        />
+      </div>
+      <div className="editor">
+        <div className="editor-child border rounded">
+          <textarea
+            className="text-display"
+            style={{ resize: "none" }}
+            id="input"
+            type="text"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
+        </div>
 
-            <div className="editor-child border rounded"
-            style={{
-                overflow: "auto"}}>
-				<Preview text={text}/>
-			</div>
+        <div
+          className="editor-child border rounded"
+          style={{
+            overflow: "auto",
+          }}
+        >
+          <Preview text={text} />
+        </div>
 
-            <button className="btn btn-primary"
-            onClick={onSubmit}>
-                Save
-            </button>
-
-	</div>
+        <button className="btn btn-primary" onClick={onSubmit}>
+          Save
+        </button>
+      </div>
+    </>
   );
 }

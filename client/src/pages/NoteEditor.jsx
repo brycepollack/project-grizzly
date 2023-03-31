@@ -1,8 +1,8 @@
-import { Link, useParams } from 'react-router-dom';
-import Spinner from '../components/Spinner';
-import Editor from '../components/Editor';
-import { useQuery } from '@apollo/client';
-import { GET_NOTE } from '../queries/noteQueries';
+import { Link, useParams } from "react-router-dom";
+import Spinner from "../components/Spinner";
+import Editor from "../components/Editor";
+import { useQuery } from "@apollo/client";
+import { GET_NOTE } from "../queries/noteQueries";
 
 export default function NoteEditor() {
   const { id } = useParams();
@@ -16,13 +16,13 @@ export default function NoteEditor() {
     <>
       {!loading && !error && (
         <>
-        <h1>{data.note.title}</h1>
+          {/* <h1>{data.note.title}</h1> */}
 
-        <Editor note={data.note}/>
+          <Editor note={data.note} />
 
-        <Link to='/' className='btn btn-secondary'>
+          <Link to="/" className="btn btn-secondary">
             Back
-        </Link>
+          </Link>
         </>
       )}
     </>
