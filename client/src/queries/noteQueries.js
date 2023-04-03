@@ -1,13 +1,13 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const GET_NOTES = gql`
-    query getNotes {
-        notes {
-            id
-            title
-            text
-        }
+  query getNotes {
+    notes {
+      id
+      title
+      text
     }
+  }
 `;
 
 const GET_NOTE = gql`
@@ -20,4 +20,4 @@ const GET_NOTE = gql`
   }
 `;
 
-export {GET_NOTES, GET_NOTE};
+export { GET_NOTES, GET_NOTE };
