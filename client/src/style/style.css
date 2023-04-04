@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
 
+
+
+/*******************************
+          General
+*******************************/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,10 +17,8 @@ body {
 }
 
 .parent-container {
+  padding-left: 200px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 
 .container {
@@ -23,6 +27,15 @@ body {
   border: 1px solid steelblue;
   padding: 30px;
   border-radius: 5px;
+}
+
+/*******************************
+          Editor 
+*******************************/
+
+.editor-container {
+  margin-left: 76px;
+  width: 100%;
 }
 
 .editor {
@@ -64,4 +77,114 @@ textarea {
   padding: 10px 15px;
   border-radius: 5px;
   background: rgb(196, 193, 193);
+}
+
+/*******************************
+          Editor Sidebar
+*******************************/
+
+.icon {
+  float: right;
+  display: inline;
+  height: 10%;
+  width: auto;
+}
+
+.ui.teal.header {
+  color: #00b5ad !important;
+}
+
+#siteTitle {
+	text-align: center;
+	font-size: 40px;
+}
+
+.ui.inverted.menu {
+  background: #1b1c1d;
+  box-shadow: none;
+}
+
+.ui.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: none;
+  will-change: transform;
+  height: 100% !important;
+  border-radius: 0em !important;
+  margin: 0em !important;
+  overflow-y: auto !important;
+  z-index: 102;
+  display: flex;
+  flex-direction: column;
+}
+
+.ui.left.sidebar {
+  width: 260px;
+}
+
+.ui.centered.header,
+.ui.center.aligned.header {
+  text-align: center;
+  color: #fff;
+  font-size: 1.28rem;
+}
+
+.ui.menu .item {
+  position: relative;
+  padding: 0.78571em 0.95em;
+  vertical-align: middle;
+  line-height: 1;
+  text-decoration: none;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+
+.ui.inverted.menu .item {
+  color: #fff;
+}
+
+.nav-logo {
+  padding: 5px 10px 5px 10px;
+  font-size: 2em;
+  color: var(--font2);
+  line-height: 0;
+  width: 200px;
+}
+
+.nav-logo:hover:not(.nav-active) {
+  background-color: var(--bg4);
+  border-radius: 5px;
+  width: 200px;
+}
+
+.nav-active {
+  background-color: var(--bg3);
+  border-radius: 5px;
+  color: var(--font1);
+  /*box-shadow: 0px 0px 130px 13px black;*/
+  width: 200px;
+}
+
+.nav-link{
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: normal;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block
+}
+
+.sidenav {
+  list-style-type: none;
+  margin-bottom: 200px;
+}
+
+.button-text {
+  font-size: 16px;
+  text-align: left;
+  padding-right: 10px;
+  display: inline-block;
 }

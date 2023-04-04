@@ -11,15 +11,15 @@ export default function NotesDisplay() {
 
     // console.log(data.notes);
     return <>{!loading && !error && 
-        <table>
-            <thead>
+        <table className='table'>
+            <thead >
                 <tr>
-                    <th>Title</th>
-                    <th>Text</th>
-                    <th></th>
+                    <th scope='col'>Title</th>
+                    <th scope='col'>Edit</th>
+                    <th scope='col'>Delete</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 {data.notes.map((note) => (
                     <NoteRow key={note.id} note={note}></NoteRow>
                 ))}

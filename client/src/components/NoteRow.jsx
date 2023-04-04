@@ -19,7 +19,6 @@ export default function NoteRow({ note }) {
     return (
         <tr>
             <td>{ note.title }</td>
-            <td>{ note.text }</td>
             <td>
                 <a className="btn btn-success btn-sm"
                 href={`/notes/${note.id}`}>

@@ -81,7 +81,6 @@ const App = () => {
       <ApolloProvider client={client}>
         <Router>
           <Header user={user} />
-          <div className="container">
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route
@@ -93,7 +92,6 @@ const App = () => {
                 element={user ? <NoteEditor /> : <Navigate to="/login" />}
               />
             </Routes>
-          </div>
         </Router>
       </ApolloProvider>
     </>
