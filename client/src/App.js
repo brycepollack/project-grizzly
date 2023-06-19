@@ -82,10 +82,10 @@ const App = () => {
         <Router>
           <Header user={user} />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/notes" element={<Home />} />
               <Route
                 path="/login"
-                element={user ? <Navigate to="/" /> : <Login />}
+                element={user ? <Navigate to="/notes" /> : <Login />}
               />
               <Route
                 path="/notes/:id"
