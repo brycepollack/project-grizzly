@@ -4,6 +4,7 @@ const User = require("../models/User");
 
 const passport = require("passport");
 
+console.log("clientid " + process.env.GOOGLE_CLIENT_ID)
 passport.use(
   new GoogleStrategy(
     {
@@ -35,16 +36,6 @@ passport.use(
     }
   )
 );
-
-// old and not working
-
-// passport.serializeUser((user, done) => {
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((id, done) => {
-//   User.findById(id, (err, user) => done(err, user));
-// });
 
 passport.serializeUser(function (user, done) {
   // process.nextTick(function () {

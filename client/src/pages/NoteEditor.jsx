@@ -19,7 +19,6 @@ export default function NoteEditor() {
         <>
 
           <div className="parent-container">
-            <EditorSidebar />
             <div className="editor-container">
               <Editor note={data.note} />
             </div>
