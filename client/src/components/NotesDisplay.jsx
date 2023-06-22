@@ -1,15 +1,22 @@
 import { gql, useQuery } from '@apollo/client';
 import NoteRow from './NoteRow';
-import { GET_NOTES } from '../queries/noteQueries';
+import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
 import Spinner from './Spinner';
 
-export default function NotesDisplay() {
-    const { loading, error, data } = useQuery(GET_NOTES);
+export default function NotesDisplay({ user }) {
+    //const { loading, error, data } = useQuery(GET_NOTES);
+    
+    const { loading, error, data } = useQuery(GET_MY_NOTES, { variables: { userId : user._id } });
+    
 
     if (loading) return <Spinner />;
     if (error) return <p>Something went wrong</p>;
 
-    // console.log(data.notes);
+    // var filteredNotes = data.notes.filter(function (note) {
+    //     return note.user.id === user._id;
+    // });
+
+   
     return <>{!loading && !error && 
         <table className='table'>
             <thead >
@@ -20,8 +27,8 @@ export default function NotesDisplay() {
                 </tr>
             </thead>
             <tbody >
-                {data.notes.map((note) => (
-                    <NoteRow key={note.id} note={note}></NoteRow>
+                {data.mynotes.map((note) => (
+                    <NoteRow key={note.id} note={note} user={user}></NoteRow>
                 ))}
             </tbody>
         </table>

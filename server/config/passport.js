@@ -4,7 +4,6 @@ const User = require("../models/User");
 
 const passport = require("passport");
 
-console.log("clientid " + process.env.GOOGLE_CLIENT_ID)
 passport.use(
   new GoogleStrategy(
     {
@@ -13,13 +12,11 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
+      //console.log("profile: " + JSON.stringify(profile));
       const newUser = {
         googleId: profile.id,
         displayName: profile.displayName,
-        firstName: profile.name.givenName,
-        lastName: profile.name.familyName,
-        image: profile.photos[0].value,
+        image: profile.photos[0].value
       };
       try {
         let user = await User.findOne({ googleId: profile.id });

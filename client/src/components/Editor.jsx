@@ -63,7 +63,7 @@ export default function Editor({ note }) {
           Save
         </button>
 
-        <Link to="/" className="btn btn-secondary">
+        <Link to="/notes" className="btn btn-secondary">
             Back
         </Link>
     </>

@@ -1,22 +1,26 @@
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_NOTE } from "../mutations/noteMutations";
-import { GET_NOTES } from "../queries/noteQueries";
+import { GET_NOTES, GET_MY_NOTES } from "../queries/noteQueries";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
-export default function AddNote() {
+export default function AddNote({ user }) {
+
+  //console.log("AddNote - User: " + JSON.stringify(user));
+
   const navigate = useNavigate();
 
   const title = "Untitled";
   const text = "";
 
   const [addNote] = useMutation(ADD_NOTE, {
-    variables: { title, text },
+    variables: { title : title, text : text, userId : user._id, },
     update(cache, { data: { addNote } }) {
-      const { notes } = cache.readQuery({ query: GET_NOTES });
-
+      const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
       cache.writeQuery({
-        query: GET_NOTES,
-        data: { notes: [...notes, addNote] },
+        query: GET_MY_NOTES,
+        variables: { userId : user._id },
+        data: { mynotes: [...mynotes, addNote] },
       });
     },
   });
