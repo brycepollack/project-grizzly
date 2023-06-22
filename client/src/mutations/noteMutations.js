@@ -1,11 +1,16 @@
 import { gql } from '@apollo/client';
 
 const ADD_NOTE = gql`
-    mutation addNote($title: String!, $text: String!) {
-        addNote(title: $title, text: $text) {
+    mutation addNote($title: String!, $text: String!, $userId: ID!) {
+        addNote(title: $title, text: $text, userId: $userId) {
             id
             title
             text
+            user {
+              id
+              googleId
+              displayName
+            }
         }
     }
 `;
@@ -14,8 +19,6 @@ const DELETE_NOTE = gql`
     mutation deleteNote($id: ID!) {
         deleteNote(id: $id) {
             id
-            title
-            text
         }
     }
 `;
@@ -26,6 +29,11 @@ const UPDATE_NOTE = gql`
       id
       title
       text
+      user {
+        id
+        googleId
+        displayName
+      }
     }
   }
 `;

@@ -1,21 +1,24 @@
 import { MdDelete, MdModeEdit } from 'react-icons/md'
-import { useMutation } from '@apollo/client';
+import { FaTrash, FaEdit } from 'react-icons/fa'
+import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_NOTE } from '../mutations/noteMutations';
-import { GET_NOTES } from '../queries/noteQueries';
+import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
 import { IconContext } from 'react-icons';
 
-export default function NoteRow({ note }) {
+export default function NoteRow({ note, user }) {
+    
     const [deleteNote] = useMutation(DELETE_NOTE, {
         variables: { id: note.id },
         update(cache, { data: { deleteNote } }) {
-              const { notes } = cache.readQuery({ query: GET_NOTES });
-              cache.writeQuery({
-                query: GET_NOTES,
-                data: {
-                  notes: notes.filter((note) => note.id !== deleteNote.id),
-                },
-              });
+            const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
+            cache.writeQuery({
+            query: GET_MY_NOTES,
+            variables: { userId : user._id },
+            data: {
+                mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
             },
+            });
+        },
     });
     return (
         <tr>

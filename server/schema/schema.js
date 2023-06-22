@@ -20,6 +20,12 @@ const NoteType = new GraphQLObjectType({
     id: { type: GraphQLID },
     title: { type: GraphQLString },
     text: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
   }),
 });
 
@@ -29,8 +35,6 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     googleId: { type: GraphQLString },
     displayName: { type: GraphQLString },
-    firstName: { type: GraphQLString },
-    lastName: { type: GraphQLString },
   }),
 });
 
@@ -42,6 +46,14 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         // return notes;
         return Note.find();
+      },
+    },
+    mynotes: {
+      type: new GraphQLList(NoteType),
+      args: { userId: { type: GraphQLID } },
+      resolve(parent, args) {
+        // return notes.find(note => note.id === args.id);
+        return Note.find({ userId: args.userId });
       },
     },
     note: {
@@ -71,11 +83,13 @@ const mutation = new GraphQLObjectType({
       args: {
         title: { type: GraphQLNonNull(GraphQLString) },
         text: { type: GraphQLString },
+        userId: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
         const note = new Note({
           title: args.title,
           text: args.text,
+          userId: args.userId,
         });
 
         return note.save();

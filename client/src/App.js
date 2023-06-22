@@ -5,7 +5,10 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
+  from,
+  HttpLink
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import {
   BrowserRouter as Router,
   Route,
@@ -33,9 +36,22 @@ const cache = new InMemoryCache({
   },
 });
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+const httpLink = new HttpLink({ uri: 'http://localhost:8080/graphql' });
+
 const client = new ApolloClient({
-  uri: "http://localhost:8080/graphql",
+  uri: httpLink,
   cache,
+  link: from([errorLink, httpLink]),
 });
 
 const App = () => {
@@ -45,6 +61,7 @@ const App = () => {
 
   useEffect(() => {
     const getUser = () => {
+      
       fetch("http://localhost:8080/auth/login/success", {
         method: "GET",
         credentials: "include",
@@ -55,6 +72,7 @@ const App = () => {
         },
       })
         .then((response) => {
+          
           if (response.status === 200) return response.json();
           throw new Error("authentication has been failed!");
         })
@@ -62,8 +80,9 @@ const App = () => {
           setUser(resObject.user);
 
           // for persistence
-          console.log(JSON.stringify(resObject.user));
+          console.log("User: " + JSON.stringify(resObject.user));
           window.localStorage.setItem("user", JSON.stringify(resObject.user));
+          
         })
         .catch((err) => {
           console.log(err);
@@ -72,7 +91,7 @@ const App = () => {
     getUser();
   }, []);
 
-  console.log(user);
+  //console.log("App - User: " + JSON.stringify(user));
 
   // MINOR PROBLEM: ON FIRST LOGIN USER IS STILL REDIRECTED BACK TO LOGIN PAGE
 
@@ -82,7 +101,7 @@ const App = () => {
         <Router>
           <Header user={user} />
             <Routes>
-              <Route path="/notes" element={<Home />} />
+              <Route path="/notes" element={<Home user={user} />} />
               <Route
                 path="/login"
                 element={user ? <Navigate to="/notes" /> : <Login />}

@@ -127,8 +127,6 @@ export default function Editor({ note }) {
         </div>
       {/* </div> */}
       
-
-        
     </>
   );
 }
