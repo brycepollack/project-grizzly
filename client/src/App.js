@@ -108,7 +108,7 @@ const App = () => {
               />
               <Route
                 path="/notes/:id"
-                element={user ? <NoteEditor /> : <Navigate to="/login" />}
+                element={user ? <NoteEditor user={user} /> : <Navigate to="/login" />}
               />
             </Routes>
         </Router>

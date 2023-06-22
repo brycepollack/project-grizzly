@@ -1,14 +1,14 @@
 import { useState, useEffect, createRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { GET_NOTE, GET_NOTES } from "../queries/noteQueries";
+import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
 import styles from '../style/editor.css'
 import Preview from "./Preview";
 import { HiEye } from 'react-icons/hi'
 import { AiTwotoneEdit } from 'react-icons/ai'
 
-export default function Editor({ note }) {
+export default function Editor({ user, note }) {
   const navigate = useNavigate();
   // console.log("editor note " + note);
   const [title, setTitle] = useState(note.title);
@@ -24,11 +24,12 @@ export default function Editor({ note }) {
   const [deleteNote] = useMutation(DELETE_NOTE, {
     variables: { id: note.id },
     update(cache, { data: { deleteNote } }) {
-          const { notes } = cache.readQuery({ query: GET_NOTES });
+          const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
           cache.writeQuery({
-            query: GET_NOTES,
+            query: GET_MY_NOTES,
+            variables: { userId : user._id },
             data: {
-              notes: notes.filter((note) => note.id !== deleteNote.id),
+              mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
             },
           });
         },

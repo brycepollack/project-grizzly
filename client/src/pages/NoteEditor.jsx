@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { GET_NOTE } from "../queries/noteQueries";
 import { useState } from "react";
 
-export default function NoteEditor() {
+export default function NoteEditor({ user }) {
   const { id } = useParams();
   const { loading, error, data } = useQuery(GET_NOTE, { variables: { id } });
 
@@ -18,8 +18,8 @@ export default function NoteEditor() {
     <>
       {!loading && !error && (
         <div className="editor-parent">
-            <EditorSidebar currNote={data.note}/>
-            <Editor note={data.note} />
+            <EditorSidebar user={ user } currNote={data.note}/>
+            <Editor user={user} note={data.note} />
         </div>
       )}</>
   );
