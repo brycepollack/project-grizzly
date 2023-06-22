@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { gql, useQuery, useMutation } from "@apollo/client";
-import { GET_NOTES } from "../queries/noteQueries";
+import { GET_MY_NOTES } from "../queries/noteQueries";
 import Spinner from "./Spinner";
 import { ADD_NOTE } from "../mutations/noteMutations";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,11 @@ import { MdClose, MdExpandMore, MdViewSidebar } from "react-icons/md";
 import { BsList } from "react-icons/bs";
 import { IoCaretForward } from "react-icons/io5";
 
-export default function EditorSidebar({ currNote }) {
+export default function EditorSidebar({ user, currNote }) {
   // console.log("curr note is " + currNote);
-  const { loading, error, data } = useQuery(GET_NOTES);
+  // const { loading, error, data } = useQuery(GET_NOTES);
+
+  const { loading, error, data } = useQuery(GET_MY_NOTES, { variables: { userId : user._id } });
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => {
@@ -23,20 +25,18 @@ export default function EditorSidebar({ currNote }) {
     setSidebar(!sidebar);
   };
 
-
   const navigate = useNavigate();
-
   const title = "Untitled";
   const text = "";
 
   const [addNote] = useMutation(ADD_NOTE, {
-    variables: { title, text },
+    variables: { title : title, text : text, userId : user._id, },
     update(cache, { data: { addNote } }) {
-      const { notes } = cache.readQuery({ query: GET_NOTES });
-
+      const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
       cache.writeQuery({
-        query: GET_NOTES,
-        data: { notes: [...notes, addNote] },
+        query: GET_MY_NOTES,
+        variables: { userId : user._id },
+        data: { mynotes: [...mynotes, addNote] },
       });
     },
   });
@@ -50,6 +50,8 @@ export default function EditorSidebar({ currNote }) {
 
   if (loading) return <Spinner />;
   if (error) return <p>Something went wrong</p>;
+
+  console.log(data);
 
   return (
     <>
@@ -69,7 +71,7 @@ export default function EditorSidebar({ currNote }) {
 
                 <div style={{fontSize:'0.8em', fontWeight:'700', margin:'30px 0px 0px'}}>MY NOTES</div>
 
-                {data.notes.map((note) => {
+                {data.mynotes.map((note) => {
                   if (note.id == currNote.id) {
                     return (
                       <div className="sidebar-note current-note">
