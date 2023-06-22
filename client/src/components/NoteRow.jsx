@@ -1,7 +1,9 @@
+import { MdDelete, MdModeEdit } from 'react-icons/md'
 import { FaTrash, FaEdit } from 'react-icons/fa'
 import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_NOTE } from '../mutations/noteMutations';
 import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
+import { IconContext } from 'react-icons';
 
 export default function NoteRow({ note, user }) {
     
@@ -21,17 +23,23 @@ export default function NoteRow({ note, user }) {
     return (
         <tr>
             <td>{ note.title }</td>
-            <td>
-                <a className="btn btn-success btn-sm"
+            <td style={{ textAlign: 'center'}}>
+                <a href={`/notes/${note.id}`}>
+            <IconContext.Provider value={{style:{color:"green"}, className:"hover-btn"}}>
+                <MdModeEdit /></IconContext.Provider></a>
+                {/* <a className="btn btn-success btn-sm"
                 href={`/notes/${note.id}`}>
-                    <FaEdit />
-                </a>
+                    <MdModeEdit />
+                </a> */}
             </td>
-            <td>
-                <button className="btn btn-danger btn-sm"
+            <td style={{ textAlign: 'center'}}>
+                <a onClick={deleteNote}>
+            <IconContext.Provider value={{style:{color:"red"}, className:"hover-btn"}}>
+                <MdDelete /></IconContext.Provider></a>
+                {/* <button className="btn btn-danger btn-sm"
                 onClick={deleteNote}>
-                    <FaTrash />
-                </button>
+                    <MdDelete />
+                </button> */}
             </td>
         </tr>
     );
