@@ -28,7 +28,7 @@ export default function AddNote() {
     });
   };
   return (
-    <button className="btn-secondary mt-4 btn-sm" onClick={createNote}>
+    <button className="btn btn-primary btn-lg" onClick={createNote}>
       New note
     </button>
   );

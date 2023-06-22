@@ -15,8 +15,8 @@ export default function NotesDisplay() {
             <thead >
                 <tr>
                     <th scope='col'>Title</th>
-                    <th scope='col'>Edit</th>
-                    <th scope='col'>Delete</th>
+                    <th scope='col' style={{ textAlign: 'center'}}>Edit</th>
+                    <th scope='col' style={{ textAlign: 'center'}}>Delete</th>
                 </tr>
             </thead>
             <tbody >

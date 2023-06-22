@@ -4,6 +4,7 @@ import Editor from "../components/Editor";
 import EditorSidebar from "../components/EditorSidebar"
 import { useQuery } from "@apollo/client";
 import { GET_NOTE } from "../queries/noteQueries";
+import { useState } from "react";
 
 export default function NoteEditor() {
   const { id } = useParams();
@@ -16,16 +17,10 @@ export default function NoteEditor() {
   return (
     <>
       {!loading && !error && (
-        <>
-
-          <div className="parent-container">
-            <div className="editor-container">
-              <Editor note={data.note} />
-            </div>
-          </div>
-
-        </>
-      )}
-    </>
+        <div className="editor-parent">
+            <EditorSidebar currNote={data.note}/>
+            <Editor note={data.note} />
+        </div>
+      )}</>
   );
 }
