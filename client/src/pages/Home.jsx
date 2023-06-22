@@ -1,18 +1,34 @@
 import NotesDisplay from '../components/NotesDisplay';
 import AddNote from '../components/AddNote';
 
-export default function Home() {
+export default function Home({ user }) {
+
+    //console.log("Home - User: " + JSON.stringify(user));
+
     return (
         <>
-            <div className='container'>
-                <div className='d-flex justify-content-center flex-nowrap'>
-                    <NotesDisplay /> 
+            {user ? (
+                <>
+                <div className='container'>
+                    <div className='d-flex justify-content-center flex-nowrap'>
+                        <NotesDisplay user={user} /> 
+                    </div>
                 </div>
-            </div>
+
+                <div className='d-flex justify-content-center flex-nowrap'>
+                    <AddNote user={user} />
+                </div>
+                </>
+
+            ) : (
+
+                <div className='container'>
+                    <div className='d-flex justify-content-center flex-nowrap'>
+                        <span>Something went wrong</span> 
+                    </div>
+                </div>
+            )}
             
-            <div className='d-flex justify-content-center flex-nowrap'>
-                <AddNote />
-            </div>
         </>
     );
 }
