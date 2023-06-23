@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
-import styles from '../style/editor.css'
+import '../style/editor.css'
 import Preview from "./Preview";
 import { HiEye } from 'react-icons/hi'
 import { AiTwotoneEdit } from 'react-icons/ai'
