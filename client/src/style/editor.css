@@ -78,8 +78,48 @@
 
   }
 
-  .preview-btn:hover {
-    background-color: aqua;
+  /* .preview-btn:focus {
+    outline: none;
+    color: white;
+  } */
+
+  .preview-toggle {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    /* border: solid lightgray; */
+    /* padding: 4px 4px; */
+    border-radius: 8px;
+    align-items: center;
+    /* overflow: hidden; */
+    margin: 0px 10px;
+  }
+
+  .preview-icon.active {
+    background-color: gray;
+    color: white;
+  }
+
+  .preview-icon.inactive{
+    transition: all 0.2s;
+    border: solid lightgray;
+  }
+  .preview-icon.inactive:hover {
+    background-color: rgb(241, 241, 241);
+  }
+
+  .preview-icon {
+    height: 100%;
+    width: 32px;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .separator {
+    height: 90%;
+    width: 2px;
+    background-color: rgb(196, 196, 196);
   }
 
 
@@ -102,7 +142,7 @@
   #title-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     gap: 10px;
   }

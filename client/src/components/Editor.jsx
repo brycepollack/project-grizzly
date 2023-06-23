@@ -3,14 +3,55 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
-import styles from '../style/editor.css'
+import '../style/editor.css'
 import Preview from "./Preview";
-import { HiEye } from 'react-icons/hi'
-import { AiTwotoneEdit } from 'react-icons/ai'
+import Switch from '@mui/material/Switch'
+
+import { MdOutlineDocumentScanner, MdDocumentScanner, MdEditDocument } from 'react-icons/md'
+
+import { alpha, styled } from '@mui/material/styles';
+import { pink } from '@mui/material/colors';
+
+// const PinkSwitch = styled(Switch)(({ theme }) => ({
+//   width: 72,
+//   height: 32,
+//   padding: 0,
+  // '& .MuiSwitch-switchBase.Mui-checked': {
+  //   color: pink[600],
+  //   '&:hover': {
+  //     backgroundColor: alpha(pink[600], theme.palette.action.hoverOpacity),
+  //   },
+  // },
+//   '& .MuiSwitch-switchBase': {
+//     transitionDuration: '300ms',
+//     '&.Mui-checked': {
+//       transform: 'translateX(36px)',
+//       color: '#fff',
+//       '& + .MuiSwitch-track': {
+//         backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+//         opacity: 1,
+//         border: 0,
+//       },
+//       '&.Mui-disabled + .MuiSwitch-track': {
+//         opacity: 0.5,
+//       },
+//     },
+//   },
+//   // '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+//   //   backgroundColor: pink[600],
+//   // },
+//   '& .MuiSwitch-track': {
+//     borderRadius: 72 / 2,
+//     backgroundColor: '#E9E9EA' ,
+//     opacity: 1,
+//     transition: theme.transitions.create(['background-color'], {
+//       duration: 500,
+//   }),
+//     },
+// }));
 
 export default function Editor({ user, note }) {
   const navigate = useNavigate();
-  // console.log("editor note " + note);
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
   const [preview, setPreview] = useState(false);
@@ -69,28 +110,43 @@ export default function Editor({ user, note }) {
       <div className="editor-container">
         <div id="title-container">
           {/* <h6 id="title-heading">Title: </h6> */}
-          <input
+          {/* <button id="preview-btn" className="hover-btn" onClick={() => {setPreview(!preview)}}>
+            {preview ? (<AiTwotoneEdit size={'1.2em'}/>) : (<HiEye size={'1.2em'}/>)}
+          </button> */}
+          {/* <PinkSwitch onChange={() => setPreview(!preview)}/> */}
+
+          <div className="preview-toggle" >
+            <MdEditDocument className={preview ? "preview-icon inactive" : "preview-icon active"} onClick={() => {setPreview(false)}}/>
+            {/* <div className="separator"></div> */}
+            <MdDocumentScanner className={preview ? "preview-icon active" : "preview-icon inactive"} onClick={() => setPreview(true)}/>
+          </div>
+
+          {/* <button className={preview ? "btn btn-secondary btn-lg preview-btn" : "btn btn-outline-secondary btn-lg preview-btn"} 
+          onClick={() => setPreview(!preview)}
+          onKeyPress={(e) => e.target.blur()}>
+            Preview
+          </button> */}
+          
+          <button className="btn btn-primary btn-lg" onClick={onSubmit}>
+            Save
+          </button>
+
+          <Link to="/notes" className="btn btn-secondary btn-lg">
+              Back
+          </Link>
+
+          <button className="btn btn-danger btn-lg" onClick={deleteNote}>
+            Delete
+          </button>
+        </div>
+
+        <input
             type="text"
             placeholder="Title here..."
             id="title-input"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
           />
-          <button id="preview-btn" className="hover-btn" onClick={() => {setPreview(!preview)}}>
-            {preview ? (<AiTwotoneEdit size={'1.2em'}/>) : (<HiEye size={'1.2em'}/>)}
-          </button>
-          <button id="save-btn" className="btn btn-primary btn-lg" onClick={onSubmit}>
-            Save
-          </button>
-
-          <Link id="back-btn" to="/notes" className="btn btn-secondary btn-lg">
-              Back
-          </Link>
-
-          <button id="delete-btn" className="btn btn-danger btn-lg" onClick={deleteNote}>
-            Delete
-          </button>
-        </div>
         {/* <div className="editor"> */}
 
           {/* <div className="editor-child">
