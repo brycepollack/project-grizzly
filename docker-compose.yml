@@ -1,0 +1,36 @@
+version: "3.3"
+services:
+  server:
+    container_name: "grizzly_server"
+    build:
+      context: ./server
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=${NODE_ENV}
+      - MONGO_URI=${MONGO_URI}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+    ports:
+      - "8080:8080"
+    expose:
+      - "8080"
+    volumes:
+      - ./server/routes:/express/routes
+      - ./server/index.js:/express/index.js
+  client:
+    container_name: "grizzly_client"
+    build:
+      context: ./client
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - NODE_ENV=${NODE_ENV}
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    volumes:
+      - ./client/src:/app/src
+volumes:
+  react:
+  node:
+

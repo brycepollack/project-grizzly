@@ -5,20 +5,20 @@ const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const connectDB = require("./config/db");
-const MongoStore = require("connect-mongo");
+//const MongoStore = require("connect-mongo");
 const port = process.env.PORT || 8080;
 
 const passport = require("passport");
-const session = require("express-session");
+//const session = require("express-session");
 const cookieSession = require("cookie-session");
 
-const exphbs = require("express-handlebars");
+//const exphbs = require("express-handlebars");
 
 const app = express();
 
 const { authRoutes } = require("./routes/auth");
 
-const passportSetup = require("./config/passport");
+//const passportSetup = require("./config/passport");
 // require("./config/passport")(passport);
 
 // Connect to database
