@@ -8,7 +8,7 @@ const ADD_NOTE = gql`
             text
             user {
               id
-              googleId
+              authId
               displayName
             }
         }
@@ -31,7 +31,7 @@ const UPDATE_NOTE = gql`
       text
       user {
         id
-        googleId
+        authId
         displayName
       }
     }

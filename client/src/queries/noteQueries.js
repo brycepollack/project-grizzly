@@ -8,7 +8,7 @@ const GET_NOTES = gql`
       text
       user {
         id
-        googleId
+        authId
         displayName
       }
     }
@@ -23,7 +23,7 @@ const GET_MY_NOTES = gql`
       text
       user {
         id
-        googleId
+        authId
         displayName
       }
     }
@@ -38,7 +38,7 @@ const GET_NOTE = gql`
       text
       user {
         id
-        googleId
+        authId
         displayName
       }
     }

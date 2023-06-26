@@ -21,6 +21,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import NoteEditor from "./pages/NoteEditor";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -101,7 +102,10 @@ const App = () => {
         <Router>
           <Header user={user} />
             <Routes>
-              <Route path="/notes" element={<Home user={user} />} />
+              <Route 
+                path="/notes" 
+                element={<Home user={user} />} 
+              />
               <Route
                 path="/login"
                 element={user ? <Navigate to="/notes" /> : <Login />}
@@ -109,6 +113,10 @@ const App = () => {
               <Route
                 path="/notes/:id"
                 element={user ? <NoteEditor user={user} /> : <Navigate to="/login" />}
+              />
+              <Route
+                path="/signup"
+                element={user ? <Navigate to="/notes" /> : <Signup />}
               />
             </Routes>
         </Router>
