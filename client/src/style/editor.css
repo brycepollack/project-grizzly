@@ -32,7 +32,7 @@
 
   .nav-menu.active {
     visibility: visible;
-    width: 10vw;
+    width: 120px;
     opacity: 1;
     transition: width 1s, opacity 3s;
   }
@@ -40,7 +40,7 @@
   .nav-menu-items {
     padding: 0;
     margin: 0;
-    width: 10vw;
+    width: 100%;
     min-width: 5vw;
   }
 
@@ -65,7 +65,7 @@
     color: white;
     text-align: center;
     border-radius: 10px;
-    background-color: rgb(237, 147, 215);
+    background-color: rgb(193, 193, 193);
     padding: 8px;
     overflow: hidden;
     margin: 0px;
@@ -73,7 +73,7 @@
   }
 
   .sidebar-button:hover {
-    background-color: rgb(191, 117, 173);
+    background-color: rgb(132, 132, 132);
     color: white;
 
   }
@@ -103,7 +103,7 @@
 
   .preview-icon.inactive{
     transition: all 0.2s;
-    border: solid lightgray;
+    border: solid 2px lightgray;
   }
   .preview-icon.inactive:hover {
     background-color: rgb(241, 241, 241);
@@ -112,7 +112,7 @@
   .preview-icon {
     height: 100%;
     width: 32px;
-    padding: 4px 8px;
+    padding: 6px;
     border-radius: 6px;
   }
 
@@ -179,22 +179,11 @@
   .editor-child {
     width: 100%;
     max-width: 100vw;
+    margin-bottom: 10vh;
     /* flex: 1 1 50%; */
   }
   
   .text-display {
     overflow: hidden;
     resize: none;
-  }
-  
-  .preview :is(h1, h2, h3, h4, h5, h6) {
-    color: rgb(208, 118, 133);
-  }
-  
-  .preview :is(code) {
-    color: black;
-    display: flex;
-    padding: 10px 15px;
-    border-radius: 5px;
-    background: rgb(196, 193, 193);
   }
