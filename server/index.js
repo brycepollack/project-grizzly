@@ -20,6 +20,7 @@ const { authRoutes } = require("./routes/auth");
 
 //const passportSetup = require("./config/passport");
 // require("./config/passport")(passport);
+// require("./config/passport")
 
 // Connect to database
 connectDB();
