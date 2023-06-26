@@ -12,6 +12,9 @@ export default function NoteEditor({ user }) {
 
   if (loading) return <Spinner />;
   if (error) return <p>Something Went Wrong</p>;
+  if (data.note.user.id !== user._id) return <p>Something Went Wrong</p>;
+  //console.log("Note owner id " + JSON.stringify(data.note.user.id))
+  //console.log("User id " + JSON.stringify(user._id))
   //else setInput(data.note.text);
 
   return (

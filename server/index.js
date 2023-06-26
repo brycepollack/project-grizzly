@@ -9,18 +9,14 @@ const connectDB = require("./config/db");
 const port = process.env.PORT || 8080;
 
 const passport = require("passport");
-//const session = require("express-session");
 const cookieSession = require("cookie-session");
-
-//const exphbs = require("express-handlebars");
+require("./config/passport");
 
 const app = express();
 
 const { authRoutes } = require("./routes/auth");
 
-//const passportSetup = require("./config/passport");
-// require("./config/passport")(passport);
-// require("./config/passport")
+//require("./config/passport")(passport);
 
 // Connect to database
 connectDB();

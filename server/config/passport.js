@@ -1,4 +1,5 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GithubStrategy = require("passport-github2").Strategy;
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Folder = require("../models/Folder");
@@ -15,12 +16,42 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       //console.log("profile: " + JSON.stringify(profile));
       const newUser = {
-        googleId: profile.id,
+        authId: profile.id,
         displayName: profile.displayName,
         image: profile.photos[0].value
       };
       try {
-        let user = await User.findOne({ googleId: profile.id });
+        let user = await User.findOne({ authId: profile.id });
+        if (user) {
+          done(null, user);
+        } else {
+          user = await User.create(newUser);
+          done(null, user);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+      // done(null, profile);
+    }
+  )
+);
+
+passport.use(
+  new GithubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: "/auth/github/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      //console.log("profile: " + JSON.stringify(profile));
+      const newUser = {
+        authId: profile.id,
+        displayName: profile.displayName,
+        image: profile.photos[0].value
+      };
+      try {
+        let user = await User.findOne({ authId: profile.id });
         if (user) {
           done(null, user);
         } else {
@@ -62,3 +93,7 @@ passport.deserializeUser(function (user, done) {
   // });
   done(null, user);
 });
+
+module.exports = {
+  passport: passport,
+};
