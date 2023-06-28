@@ -107,6 +107,22 @@ a:active {
   /* color: white; */
 }
 
+.add-btn {
+  outline: none;
+  border: none;
+  background-color: white;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  padding: 4px 8px;
+  transition: background 0.2s ease-in-out;
+}
+
+.add-btn:hover {
+  background-color: rgb(241, 241, 241);
+}
+
+
 #preview-btn {
   padding: 0;
 }

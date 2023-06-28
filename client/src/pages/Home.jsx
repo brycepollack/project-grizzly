@@ -2,26 +2,59 @@ import NotesDisplay from '../components/NotesDisplay';
 import AddNote from '../components/AddNote';
 import AddFolder from '../components/AddFolder';
 
+import { gql, useQuery } from '@apollo/client';
+import { GET_FOLDER } from '../queries/folderQueries';
+import Spinner from '../components/Spinner';
+import FolderDisplay from '../components/FolderDisplay'
+import FolderPath from '../components/FolderPath';
+import Purge from '../components/Purge';
+
 export default function Home({ user }) {
+    console.log(user.homeFolder);
 
     //console.log("Home - User: " + JSON.stringify(user));
+
+    // get the home folder & display
+
+    const { loading, error, data } = useQuery(GET_FOLDER, { variables: { id: user.homeFolder }});
+    
+
+    if (loading) return <Spinner />;
+    if (error) return <p>Something went wrong</p>;
+
+    // console.log(data);
+
+    // let path = ["home"];
+    let path = [data.folder];
+    localStorage.setItem("path", JSON.stringify(path));
 
     return (
         <>
             {user ? (
                 <>
                 <div className='container'>
+
+                    <div style={{display:"flex", flexDirection:"row", 
+                    alignItems:"center",
+                    justifyContent:"center", gap:"10px"}} >
+                    
+                    <div style={{ flexGrow: '10' }}> 
+                    <FolderPath path = {path}/>
+                    </div>
+
+                    <AddNote parentFolder={data.folder} user={user} />
+                    <AddFolder parentFolder={data.folder} user={user}/>
+
+                    <Purge user={user} />
+
+                    </div>
+
                     <div className='d-flex justify-content-center flex-nowrap'>
-                        <NotesDisplay user={user} /> 
+                        <FolderDisplay folder={data.folder} user={user} /> 
                     </div>
                 </div>
 
-                <div className='d-flex justify-content-center flex-nowrap'>
-                    <AddNote user={user} />
-                </div>
-                <div className='d-flex justify-content-center flex-nowrap'>
-                    <AddFolder user={user}/>
-                </div>
+                {/* <AddDropdown parentFolder={data.folder} user={user} /> */}
                 </>
 
             ) : (

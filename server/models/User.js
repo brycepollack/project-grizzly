@@ -16,6 +16,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  homeFolder: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Folder',
+  }
 });
 
 module.exports = mongoose.model("User", UserSchema);

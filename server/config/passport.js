@@ -18,7 +18,8 @@ passport.use(
       const newUser = {
         authId: profile.id,
         displayName: profile.displayName,
-        image: profile.photos[0].value
+        image: profile.photos[0].value,
+        homeFolder: null
       };
       try {
         let user = await User.findOne({ authId: profile.id });
@@ -26,6 +27,14 @@ passport.use(
           done(null, user);
         } else {
           user = await User.create(newUser);
+          const newFolder = {
+            name: "home",
+            userId: user._id,
+            subfolders: [],
+            notes: []
+          }
+          const folder = await Folder.create(newFolder);
+          user = await User.findOneAndUpdate({_id: user._id}, { homeFolder: folder._id}, {new: true});
           done(null, user);
         }
       } catch (err) {
@@ -48,7 +57,8 @@ passport.use(
       const newUser = {
         authId: profile.id,
         displayName: profile.displayName,
-        image: profile.photos[0].value
+        image: profile.photos[0].value,
+        homeFolder: null
       };
       try {
         let user = await User.findOne({ authId: profile.id });
@@ -56,16 +66,14 @@ passport.use(
           done(null, user);
         } else {
           user = await User.create(newUser);
-
-          // CREATE HOME FOLDER AND LINK ON CREATION
-          // const homeFolder = {
-          //   name: "home",
-          //   userId: user._id,
-          //   subfolders: [],
-          //   notes: []
-          // }
-          // await Folder.create(homeFolder);
-          // findOneAndUpdate?
+          const newFolder = {
+            name: "home",
+            userId: user._id,
+            subfolders: [],
+            notes: []
+          }
+          const folder = await Folder.create(newFolder);
+          user = await User.findOneAndUpdate({_id: user._id}, { homeFolder: folder._id}, {new: true});
           done(null, user);
         }
       } catch (err) {

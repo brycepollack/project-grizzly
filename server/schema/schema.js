@@ -38,6 +38,12 @@ const UserType = new GraphQLObjectType({
     id: { type: GraphQLID },
     authId: { type: GraphQLString },
     displayName: { type: GraphQLString },
+    homeFolder: {
+      type: FolderType,
+      resolve(parent, args) {
+        return Folder.findById(parent.homeFolder);
+      }
+    }
   }),
 });
 
@@ -106,7 +112,14 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         return Folder.findById(args.id);
       }
-    }
+    },
+    // folders: {
+    //   type: new GraphQLList(FolderType),
+    //   args: { ids: {type: GraphQLList(GraphQLID) } },
+    //   resolve(parent, args) {
+    //     return Folder.find({ '_id': { $in: args.subfolders } });
+    //   }
+    // }
   },
 });
 
@@ -202,7 +215,7 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args) {
-        return Folder.findByIdAndRemove(args.id);
+        return Folder.findOneAndRemove({ _id: args.id});
       },
     },
   },
