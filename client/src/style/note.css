@@ -1,0 +1,11 @@
+.table {
+}
+
+.table tbody tr td {
+    /* text-align: center; */
+    vertical-align: middle;
+}
+
+.file-icon {
+    margin: 0px 16px;
+}

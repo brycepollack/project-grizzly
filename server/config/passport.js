@@ -4,6 +4,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const User = require("../models/User");
+const Folder = require("../models/Folder");
 
 const passport = require("passport");
 
@@ -59,6 +60,16 @@ passport.use(
           done(null, user);
         } else {
           user = await User.create(newUser);
+
+          // CREATE HOME FOLDER AND LINK ON CREATION
+          // const homeFolder = {
+          //   name: "home",
+          //   userId: user._id,
+          //   subfolders: [],
+          //   notes: []
+          // }
+          // await Folder.create(homeFolder);
+          // findOneAndUpdate?
           done(null, user);
         }
       } catch (err) {

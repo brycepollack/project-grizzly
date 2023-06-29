@@ -2,15 +2,24 @@ import { gql, useQuery } from '@apollo/client';
 import NoteRow from './NoteRow';
 import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
 import Spinner from './Spinner';
+import '../style/note.css'
+
+import { GET_FOLDER } from '../queries/folderQueries';
+
 
 export default function NotesDisplay({ user }) {
     //const { loading, error, data } = useQuery(GET_NOTES);
     
     const { loading, error, data } = useQuery(GET_MY_NOTES, { variables: { userId : user._id } });
+
+
+    // const { loading, error, data } = useQuery(GET_FOLDER, { variables: {id: "649659a32eb5c1485f2c4fda" }});
     
 
     if (loading) return <Spinner />;
     if (error) return <p>Something went wrong</p>;
+
+    // console.log(data);
 
     // var filteredNotes = data.notes.filter(function (note) {
     //     return note.user.id === user._id;
@@ -21,7 +30,7 @@ export default function NotesDisplay({ user }) {
         <table className='table'>
             <thead >
                 <tr>
-                    <th scope='col'>Title</th>
+                    <th scope='col' style={{ textAlign: 'left'}}>Title</th>
                     <th scope='col' style={{ textAlign: 'center'}}>Edit</th>
                     <th scope='col' style={{ textAlign: 'center'}}>Delete</th>
                 </tr>

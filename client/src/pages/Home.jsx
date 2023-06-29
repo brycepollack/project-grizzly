@@ -1,5 +1,6 @@
 import NotesDisplay from '../components/NotesDisplay';
 import AddNote from '../components/AddNote';
+import AddFolder from '../components/AddFolder';
 
 export default function Home({ user }) {
 
@@ -17,6 +18,9 @@ export default function Home({ user }) {
 
                 <div className='d-flex justify-content-center flex-nowrap'>
                     <AddNote user={user} />
+                </div>
+                <div className='d-flex justify-content-center flex-nowrap'>
+                    <AddFolder user={user}/>
                 </div>
                 </>
 

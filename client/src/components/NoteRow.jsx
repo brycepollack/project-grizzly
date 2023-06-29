@@ -1,4 +1,4 @@
-import { MdDelete, MdModeEdit } from 'react-icons/md'
+import { MdDelete, MdModeEdit, MdInsertDriveFile } from 'react-icons/md'
 import { FaTrash, FaEdit } from 'react-icons/fa'
 import { useMutation, useQuery } from '@apollo/client';
 import { DELETE_NOTE } from '../mutations/noteMutations';
@@ -22,7 +22,7 @@ export default function NoteRow({ note, user }) {
     });
     return (
         <tr>
-            <td>{ note.title }</td>
+            <td style={{verticalAlign: 'middle'}}><MdInsertDriveFile className='file-icon'/>{ note.title }</td>
             <td style={{ textAlign: 'center'}}>
                 <a href={`/notes/${note.id}`}>
             <IconContext.Provider value={{style:{color:"green"}, className:"hover-btn"}}>

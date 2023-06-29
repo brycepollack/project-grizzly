@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import parse from 'html-react-parser';
+import '../style/preview.css'
 
 export default function Preview({ text }) {
 
@@ -10,8 +11,16 @@ export default function Preview({ text }) {
   );
 }
 
+marked.use({
+  pedantic: false,
+  gfm: true,
+  breaks: true,
+  xhtml: false
+});
+
 function myParse(text) {
   let html = marked.parse(text);
-  // console.log(html);
+  // var ret = html.replace(/disabled="" /g, '');
+  // console.log(ret);
   return parse(html);
 }

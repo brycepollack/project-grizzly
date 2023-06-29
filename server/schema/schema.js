@@ -2,6 +2,7 @@ const { notes } = require("../sampleData.js");
 const Note = require("../models/Note");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const Folder = require("../models/Folder");
 
 const {
   GraphQLObjectType,
@@ -12,6 +13,8 @@ const {
   GraphQLNonNull,
   GraphQLEnumType,
 } = require("graphql");
+const { type } = require("express/lib/response.js");
+const { default: mongoose } = require("mongoose");
 
 // Note Type
 const NoteType = new GraphQLObjectType({
@@ -38,6 +41,32 @@ const UserType = new GraphQLObjectType({
     displayName: { type: GraphQLString },
   }),
 });
+
+const FolderType = new GraphQLObjectType({
+  name: "Folder",
+  fields: () => ({
+    id: { type: GraphQLID },
+    name: { type: GraphQLString },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      },
+    },
+    subfolders: {
+      type: new GraphQLList(FolderType),
+      resolve(parent, args) {
+        return Folder.find({ '_id': { $in: parent.subfolders } });
+      }
+    },
+    notes: {
+      type: new GraphQLList(NoteType),
+      resolve(parent, args) {
+        return Note.find({ '_id': { $in: parent.notes } });
+      }
+    }
+  })
+})
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",
@@ -72,7 +101,13 @@ const RootQuery = new GraphQLObjectType({
         return User.find();
       },
     },
-    
+    folder: {
+      type: FolderType,
+      args: { id: {type: GraphQLID } },
+      resolve(parent, args) {
+        return Folder.findById(args.id);
+      }
+    }
   },
 });
 
@@ -153,6 +188,53 @@ const mutation = new GraphQLObjectType({
           title: args.title,
           text: args.text,
         });
+      },
+    },
+
+    addFolder: {
+      type: FolderType,
+      args: {
+        name: { type: GraphQLString },
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        subfolders: { type: GraphQLList(GraphQLID) },
+        notes: { type: GraphQLList(GraphQLID) },
+      },
+      resolve(parent, args) {
+        const folder = new Folder({
+          name: args.name,
+          userId: args.userId,
+          subfolders: args.subfolders,
+          notes: args.notes,
+        });
+        return folder.save();
+      },
+    },
+
+    updateFolder: {
+      type: FolderType,
+      args: {
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        subfolders: { type: GraphQLList(GraphQLID) },
+        notes: { type: GraphQLList(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Folder.findByIdAndUpdate(args.id, {
+          name: args.name,
+          subfolders: args.subfolders,
+          notes: args.notes,
+        });
+      },
+    },
+
+    // this needs to be nested tho...
+    deleteFolder: {
+      type: FolderType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return Folder.findByIdAndRemove(args.id);
       },
     },
   },
