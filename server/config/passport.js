@@ -1,5 +1,7 @@
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const GithubStrategy = require("passport-github2").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const User = require("../models/User");
 
@@ -13,9 +15,10 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      //console.log("profile: " + JSON.stringify(profile));
+      const hashedPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 10);
       const newUser = {
         authId: profile.id,
+        password: hashedPassword,
         displayName: profile.displayName,
         image: profile.photos[0].value
       };
@@ -43,9 +46,10 @@ passport.use(
       callbackURL: "/auth/github/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      //console.log("profile: " + JSON.stringify(profile));
+      const hashedPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 10);
       const newUser = {
         authId: profile.id,
+        password: hashedPassword,
         displayName: profile.displayName,
         image: profile.photos[0].value
       };
@@ -64,6 +68,22 @@ passport.use(
     }
   )
 );
+
+passport.use(
+  new LocalStrategy(
+    async (username, password, done) => {
+      let user = await User.findOne({ authId: username });
+      if (!user) return done(null, false);
+      let result = await bcrypt.compare(password, user.password);
+      if (result === true) {
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+        
+      }
+  )
+)
 
 passport.serializeUser(function (user, done) {
   // process.nextTick(function () {

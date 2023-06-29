@@ -5,12 +5,10 @@ import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
 import '../style/editor.css'
 import Preview from "./Preview";
-import Switch from '@mui/material/Switch'
+
 
 import { MdOutlineDocumentScanner, MdDocumentScanner, MdEditDocument } from 'react-icons/md'
 
-import { alpha, styled } from '@mui/material/styles';
-import { pink } from '@mui/material/colors';
 
 // const PinkSwitch = styled(Switch)(({ theme }) => ({
 //   width: 72,

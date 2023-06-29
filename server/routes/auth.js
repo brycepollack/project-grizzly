@@ -1,6 +1,5 @@
 const passport = require("passport");
 const router = require("express").Router();
-
 const CLIENT_URL = "http://localhost:3000";
 
 router.get("/login/failed", (req, res) => {
@@ -27,6 +26,34 @@ router.get("/logout", (req, res) => {
   req.logout();
   res.redirect(CLIENT_URL + "/login");
 });
+
+router.post("/local", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: CLIENT_URL + "/notes",
+    failureRedirect: "/login/failed",
+  }, (err, user, info) => {
+    if (err) throw err;
+    if (!user){
+      return res.status(302).json({ redirectUrl: "/login/failed" });
+    }
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        //console.log(req.user);
+        //res.redirect(CLIENT_URL + "/notes");
+        return res.status(302).json({ redirectUrl: CLIENT_URL + "/notes" });
+      });
+    }
+  })(req, res, next);
+});
+
+// router.post(
+//   "/local",
+//   passport.authenticate("local", {
+//     successRedirect: CLIENT_URL + "/notes",
+//     failureRedirect: "/login/failed",
+//   })
+// );
 
 router.get("/google", passport.authenticate("google", { scope: ["profile"], })
 );

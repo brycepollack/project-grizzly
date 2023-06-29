@@ -81,7 +81,7 @@ const App = () => {
           setUser(resObject.user);
 
           // for persistence
-          console.log("User: " + JSON.stringify(resObject.user));
+          //console.log("User: " + JSON.stringify(resObject.user));
           window.localStorage.setItem("user", JSON.stringify(resObject.user));
           
         })

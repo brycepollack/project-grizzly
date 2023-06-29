@@ -1,7 +1,7 @@
 const { notes } = require("../sampleData.js");
-
 const Note = require("../models/Note");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 const {
   GraphQLObjectType,
@@ -34,6 +34,7 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     authId: { type: GraphQLString },
+    password: { type: GraphQLString },
     displayName: { type: GraphQLString },
   }),
 });
@@ -71,6 +72,7 @@ const RootQuery = new GraphQLObjectType({
         return User.find();
       },
     },
+    
   },
 });
 
@@ -93,6 +95,37 @@ const mutation = new GraphQLObjectType({
         });
 
         return note.save();
+      },
+    },
+
+    addUser: {
+      type: UserType,
+      args: {
+        authId: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLString },
+        displayName: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+
+        const hashedPassword = await bcrypt.hash(args.password, 10);
+
+        const newuser = new User({
+          authId: args.authId,
+          password: hashedPassword,
+          displayName: args.displayName,
+        });
+
+        try {
+          let user =  await User.findOne({ authId: args.authId });
+          if (user) {
+            return null
+          } else {
+            return newuser.save();
+          }
+        } catch (err) {
+          console.error(err);
+        }
+
       },
     },
 
