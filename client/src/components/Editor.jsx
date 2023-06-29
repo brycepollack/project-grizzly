@@ -33,7 +33,7 @@ export default function Editor({ user, note }) {
           });
         },
         onCompleted: () => {
-          navigate(`/notes`);
+          navigate(`/`);
         }
     });
 
@@ -59,7 +59,13 @@ export default function Editor({ user, note }) {
   useEffect(() => {
     if (!preview) {
       console.log(textareaRef.current.scrollHeight);
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      textareaRef.current.style.height = '0px';
+
+      if (text.length === 0) {
+        textareaRef.current.style.height = '120px';
+      } else {
+        textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
+      }
     };
   }, [preview]);
 
@@ -89,7 +95,7 @@ export default function Editor({ user, note }) {
             Save
           </button>
 
-          <Link to="/notes" className="btn btn-secondary btn-lg">
+          <Link to="/" className="btn btn-secondary btn-lg">
               Back
           </Link>
 
@@ -104,6 +110,7 @@ export default function Editor({ user, note }) {
             id="title-input"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
+            style={{height:"75px", flexGrow: "0", flexShrink: "0"}}
           />
         {/* <div className="editor"> */}
 
@@ -116,7 +123,8 @@ export default function Editor({ user, note }) {
             type="text" 
             value={text} 
             style={{}}
-            className="text-display" 
+            className="text-display"
+            placeholder="Start typing here..." 
             onChange={onChangeHandler} />) }
             
           </div>

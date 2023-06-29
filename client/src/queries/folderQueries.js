@@ -7,12 +7,21 @@ const GET_FOLDER = gql`
             name
             user {
                 id
-                googleId
+                authId
                 displayName
             }
             subfolders {
                 id
                 name
+                subfolders {
+                    id
+                    name
+                }
+                notes {
+                    id
+                    title
+                    text
+                }
             }
             notes {
                 id
@@ -22,5 +31,28 @@ const GET_FOLDER = gql`
         }
     }
 `;
+
+// const GET_FOLDERS = gql`
+//     query getFolders($ids: [ID!]) {
+//         folders(ids: $ids) {
+//             id
+//             name
+//             user {
+//                 id
+//                 authId
+//                 displayName
+//             }
+//             subfolders {
+//                 id
+//                 name
+//             }
+//             notes {
+//                 id
+//                 title
+//                 text
+//             }
+//         }
+//     }
+// `;
 
 export { GET_FOLDER };

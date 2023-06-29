@@ -6,6 +6,104 @@
     vertical-align: middle;
 }
 
-.file-icon {
-    margin: 0px 16px;
+.row-icon {
+    width: 14%;
+    /* margin: 0px 16px; */
+    transition: all 2s;
 }
+
+tr {
+    height: 3em;
+    transition: background-color 0.4s;
+    /* padding: 80px 0; */
+  }
+  
+  tr:hover {
+    background-color: rgb(241, 241, 241);
+  }
+  
+  .path-folder {
+    background-color: rgb(241, 241, 241);
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  .path-folder:hover {
+    background-color: rgb(207, 207, 207);
+  }
+  
+  tr input {
+    background-color: inherit;
+    border: none;
+    width: 86%;
+  }
+
+  tr input:focus {
+    outline: none;
+  }
+
+  .edit-btn, .delete-btn {
+    height: 1.2em;
+    width: 1.2em;
+  }
+  
+  .delete-btn {
+    color: rgb(221, 23, 23);
+  }
+
+  .last-edited {
+    font-size: 0.8em;
+    /* font-size: 0.6em;
+    background-color: rgb(246, 220, 224);
+    width: fit-content;
+    margin: auto;
+    padding: 2px 4px;
+    border: solid pink;
+    border-radius: 2em;
+    color: rgb(183, 86, 102); */
+  }
+
+  .add-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* .add-container select {
+    background-color: rgb(204, 204, 204);
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+  }
+
+  .add-container select::after {
+  } */
+
+  /* .add-container > select > option {
+    font-size: 180px;
+    background-color: pink;
+  } */
+
+  .option {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .add-container input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: solid rgb(206, 206, 206);
+  }
+
+  .add-container input:focus {
+    outline: none;
+  }
+
+  .select {
+    background-color: aqua;
+  }

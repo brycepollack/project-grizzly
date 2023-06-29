@@ -22,6 +22,7 @@ import Home from "./pages/Home";
 import NoteEditor from "./pages/NoteEditor";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Folder from "./pages/Folder";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -53,6 +54,7 @@ const client = new ApolloClient({
   uri: httpLink,
   cache,
   link: from([errorLink, httpLink]),
+  connectToDevTools: true
 });
 
 const App = () => {
@@ -103,7 +105,7 @@ const App = () => {
           <Header user={user} />
             <Routes>
               <Route 
-                path="/notes" 
+                path="/" 
                 element={<Home user={user} />} 
               />
               <Route
@@ -117,6 +119,10 @@ const App = () => {
               <Route
                 path="/signup"
                 element={user ? <Navigate to="/notes" /> : <Signup />}
+              />
+              <Route 
+                path="/folder/:id"
+                element={user ? <Folder user={user} /> : <Navigate to="/login" />}
               />
             </Routes>
         </Router>

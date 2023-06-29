@@ -7,7 +7,7 @@ const ADD_FOLDER = gql`
             name
             user {
                 id
-                googleId
+                authId
                 displayName
             }
             subfolders {
@@ -31,7 +31,7 @@ const DELETE_FOLDER = gql`
             name
             user {
                 id
-                googleId
+                authId
                 displayName
             }
             subfolders {
@@ -49,13 +49,13 @@ const DELETE_FOLDER = gql`
 
 // haven't tested yet
 const UPDATE_FOLDER = gql`
-  mutation updateFolder($name: String!, $subfolders: [ID!], $notes: [ID!]) {
-    updateFolder(name: $name, subfolders: $subfolders, notes: $notes) {
+  mutation updateFolder($id: ID!, $name: String!, $subfolders: [ID!], $notes: [ID!]) {
+    updateFolder(id: $id, name: $name, subfolders: $subfolders, notes: $notes) {
         id
         name
         user {
             id
-            googleId
+            authId
             displayName
         }
         subfolders {
