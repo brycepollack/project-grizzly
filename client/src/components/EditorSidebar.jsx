@@ -12,8 +12,11 @@ import { IconContext } from "react-icons";
 import { MdClose, MdExpandMore, MdViewSidebar } from "react-icons/md";
 import { BsList } from "react-icons/bs";
 import { IoCaretForward } from "react-icons/io5";
+import AddNote from "./AddNote";
+import AddFolder from "./AddFolder";
+import Purge from "./Purge";
 
-export default function EditorSidebar({ user, currNote }) {
+export default function EditorSidebar({ user, currNote, parentFolder }) {
   // console.log("curr note is " + currNote);
   // const { loading, error, data } = useQuery(GET_NOTES);
 
@@ -44,7 +47,7 @@ export default function EditorSidebar({ user, currNote }) {
   const createNote = (e) => {
     addNote().then((response) => {
       console.log(response.data);
-      navigate(`/notes/${response.data.addNote.id}`);
+      navigate(`/note/${response.data.addNote.id}`);
     });
   };
 
@@ -65,8 +68,14 @@ export default function EditorSidebar({ user, currNote }) {
             <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
               <div className="nav-menu-items" onClick={showSidebar}>
 
-                <div className="sidebar-button" onClick={createNote}>
+                {/* <div className="sidebar-button" onClick={createNote}>
                   New note
+                </div> */}
+
+                <div style={{ display: "flex", flexDirection: "row", justifyContent:"space-around"}}>
+                  <AddNote parentFolder={parentFolder} user={user} sidebar={true}/>
+                  <AddFolder parentFolder={parentFolder} user={user} sidebar={true}/>
+                  <Purge user={user}/>
                 </div>
 
                 <div style={{fontSize:'0.8em', fontWeight:'700', margin:'30px 0px 0px'}}>MY NOTES</div>

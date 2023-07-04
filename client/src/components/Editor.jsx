@@ -3,12 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
+import { UPDATE_FOLDER } from "../mutations/folderMutations";
 import '../style/editor.css'
 import Preview from "./Preview";
 
 import { MdOutlineDocumentScanner, MdDocumentScanner, MdEditDocument } from 'react-icons/md'
 
-export default function Editor({ user, note }) {
+export default function Editor({ user, note, parentFolder }) {
   const navigate = useNavigate();
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
@@ -20,22 +21,51 @@ export default function Editor({ user, note }) {
     refetchQueries: [{ query: GET_NOTE, variables: { id: note.id } }],
   });
 
+  // const [deleteNote] = useMutation(DELETE_NOTE, {
+  //   variables: { id: note.id },
+  //   update(cache, { data: { deleteNote } }) {
+  //         const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
+  //         cache.writeQuery({
+  //           query: GET_MY_NOTES,
+  //           variables: { userId : user._id },
+  //           data: {
+  //             mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
+  //           },
+  //         });
+  //       },
+  //       onCompleted: () => {
+  //         navigate(`/home`);
+  //       }
+  //   });
+
+
   const [deleteNote] = useMutation(DELETE_NOTE, {
-    variables: { id: note.id },
-    update(cache, { data: { deleteNote } }) {
-          const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
-          cache.writeQuery({
-            query: GET_MY_NOTES,
-            variables: { userId : user._id },
-            data: {
-              mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
-            },
-          });
-        },
-        onCompleted: () => {
-          navigate(`/`);
-        }
-    });
+      variables: { id: note.id },
+      // update(cache, { data: deleteNote }) {
+      //     cache.evict({ id: `Note:${deleteNote.deleteNote.id}`});
+      // }
+  });
+
+  const [updateFolder] = useMutation(UPDATE_FOLDER)
+
+  async function removeNote() {
+      let noteId = note.id;
+      const { loading, error, data } = await deleteNote();
+      if (loading || error) return;
+
+      let subfolderIds = parentFolder.subfolders.map(a => a.id)
+      let noteIds = parentFolder.notes.map(a => a.id);
+      let filteredNoteIds = noteIds.filter(a => a!=noteId)
+
+      await updateFolder({ variables: {
+          id: parentFolder.id,
+          name: parentFolder.name,
+          subfolders: subfolderIds,
+          notes: filteredNoteIds
+      }});
+
+      navigate(`/home`);
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -95,11 +125,11 @@ export default function Editor({ user, note }) {
             Save
           </button>
 
-          <Link to="/" className="btn btn-secondary btn-lg">
-              Back
+          <Link to="/home" className="btn btn-secondary btn-lg">
+              Home
           </Link>
 
-          <button className="btn btn-danger btn-lg" onClick={deleteNote}>
+          <button className="btn btn-danger btn-lg" onClick={removeNote}>
             Delete
           </button>
         </div>

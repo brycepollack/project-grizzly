@@ -9,7 +9,7 @@ export default function FolderPath({path}) {
     return (
         <div 
         style={{display:"flex", flexDirection:"row", gap:"4px", alignItems:"center", marginBottom:"10px"}}>
-            <div onClick={() => navigate(`/`)} className="path-folder">
+            <div onClick={() => navigate(`/home`)} className="path-folder">
                 {path[0].name}
             </div>
 

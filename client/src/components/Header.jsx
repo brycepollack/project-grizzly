@@ -18,7 +18,7 @@ export default function Header({ user }) {
       </span>
       {user ? (
         <>
-        <a href={`/notes/`}>
+        <a href={`/home`}>
             <img
               src={user.image}
               alt=""

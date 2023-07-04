@@ -44,8 +44,8 @@ export default function Folder({ user }) {
                     <div style={{ flexGrow: '10' }}> 
                     <FolderPath path = {path}/>
                     </div>
-                    <AddNote parentFolder={data.folder} user={user} />
-                    <AddFolder parentFolder={data.folder} user={user} />
+                    <AddNote parentFolder={data.folder} user={user} sidebar={false} />
+                    <AddFolder parentFolder={data.folder} user={user} sidebar={false}/>
                     <Purge user={user} />
 
                     </div>
@@ -54,13 +54,6 @@ export default function Folder({ user }) {
                     <FolderDisplay folder={data.folder} user={user} /> 
                 </div>
             </div>
-
-            {/* <div className='d-flex justify-content-center flex-nowrap'>
-                <AddNote parentFolder={data.folder} user={user} />
-            </div>
-            <div className='d-flex justify-content-center flex-nowrap'>
-                <AddFolder parentFolder={data.folder} user={user}/>
-            </div> */}
         </>
     )
 }

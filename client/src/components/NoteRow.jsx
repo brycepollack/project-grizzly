@@ -70,7 +70,7 @@ export default function NoteRow({ parentFolder, note, user }) {
 
     const handleClick = () => {
         console.log("row " + note.title);
-        if (!editing) navigate(`/notes/${note.id}`);
+        if (!editing) navigate(`/note/${note.id}`, {state: { folder: parentFolder }});
     }
 
     const handleOnKeyDown = (e) => {

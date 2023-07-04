@@ -9,7 +9,7 @@ import { MdCreateNewFolder } from 'react-icons/md';
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 import { IconContext } from "react-icons";
 
-export default function AddNote({ parentFolder, user }) {
+export default function AddNote({ parentFolder, user, sidebar }) {
 
   const [noteTitle, setNoteTitle] = useState("Untitled Note");
 
@@ -38,6 +38,7 @@ export default function AddNote({ parentFolder, user }) {
     let newNoteId = null;
     const { loading, error, data } = await addNote();
     if (!loading && !error) newNoteId = data.addNote.id;
+    console.log("NEW NOTE ID: " + newNoteId + "\nNEW NOTE TITLE: " + data.addNote.title);
 
     let subfolderIds = parentFolder.subfolders.map(a => a.id)
     let noteIds = parentFolder.notes.map(a => a.id);
@@ -74,7 +75,11 @@ export default function AddNote({ parentFolder, user }) {
       query: GET_FOLDER,
       variables: { id: parentFolder.id }
     }]
-  });
+    });
+    if (sidebar) {
+      // save current note?
+      navigate(`/note/${newNoteId}`, {state: { folder: parentFolder }});
+    }
   };
   return (
     <>

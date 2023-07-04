@@ -51,7 +51,7 @@ export default function Purge({ user }) {
       
       });
     })
-    navigate(`/`);
+    navigate(`/home`);
   }
 
   return (

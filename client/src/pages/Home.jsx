@@ -42,8 +42,8 @@ export default function Home({ user }) {
                     <FolderPath path = {path}/>
                     </div>
 
-                    <AddNote parentFolder={data.folder} user={user} />
-                    <AddFolder parentFolder={data.folder} user={user}/>
+                    <AddNote parentFolder={data.folder} user={user} sidebar={false}/>
+                    <AddFolder parentFolder={data.folder} user={user} sidebar={false}/>
 
                     <Purge user={user} />
 

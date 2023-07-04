@@ -86,6 +86,9 @@ export default function FolderRow({ parentFolder, folder, user }) {
         variables: {
             id: folder.id
         },
+        update(cache, { data: deleteFolder }) {
+            cache.evict({ id: `Folder:${deleteFolder.deleteFolder.id}`});
+        }
     })
 
     async function removeFolder() {

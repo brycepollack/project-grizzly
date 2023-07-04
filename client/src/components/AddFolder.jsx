@@ -8,7 +8,7 @@ import { MdCreateNewFolder } from 'react-icons/md';
 import { IconContext } from "react-icons";
 import { GET_FOLDER } from "../queries/folderQueries";
 
-export default function AddFolder({ user, parentFolder }) {
+export default function AddFolder({ user, parentFolder, sidebar }) {
   // console.log("parent folder");
   // console.log(parentFolder);
 
@@ -19,8 +19,6 @@ export default function AddFolder({ user, parentFolder }) {
     const navigate = useNavigate();
 
     const name = "Untitled folder"
-
-    
 
     const [addFolder] = useMutation(ADD_FOLDER, {
         variables: { name : folderName, userId : user._id, subfolders : [], notes : []},
@@ -61,6 +59,13 @@ export default function AddFolder({ user, parentFolder }) {
       variables: { id: parentFolder.id }
     }]  
   });
+
+  if (sidebar) {
+    // save current note?
+
+    // PATH???????????????
+    navigate(`/folder/${newFolderID}`);
+  }
   };
   return (
     <>
