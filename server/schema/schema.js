@@ -117,6 +117,14 @@ const RootQuery = new GraphQLObjectType({
         return Folder.findById(args.id);
       }
     },
+    myfolders: {
+      type: new GraphQLList(FolderType),
+      args: { userId: { type: GraphQLID } },
+      resolve(parent, args) {
+        // return notes.find(note => note.id === args.id);
+        return Folder.find({ userId: args.userId });
+      },
+    },
     // folders: {
     //   type: new GraphQLList(FolderType),
     //   args: { ids: {type: GraphQLList(GraphQLID) } },

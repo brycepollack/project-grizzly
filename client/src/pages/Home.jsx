@@ -7,11 +7,9 @@ import { GET_FOLDER } from '../queries/folderQueries';
 import Spinner from '../components/Spinner';
 import FolderDisplay from '../components/FolderDisplay'
 import FolderPath from '../components/FolderPath';
-import Purge from '../components/Purge';
+//import Purge from '../components/Purge';
 
 export default function Home({ user }) {
-    console.log("user: " + user);
-    console.log("homefolder: " + user.homeFolder);
 
     //console.log("Home - User: " + JSON.stringify(user));
 
@@ -45,8 +43,6 @@ export default function Home({ user }) {
 
                     <AddNote parentFolder={data.folder} user={user} sidebar={false}/>
                     <AddFolder parentFolder={data.folder} user={user} sidebar={false}/>
-
-                    <Purge user={user} />
 
                     </div>
 

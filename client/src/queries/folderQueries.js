@@ -32,6 +32,38 @@ const GET_FOLDER = gql`
     }
 `;
 
+const GET_MY_FOLDERS = gql`
+  query getMyFolders($userId: ID!) {
+    myfolders(userId: $userId) {
+        id
+        name
+        user {
+            id
+            authId
+            displayName
+        }
+        subfolders {
+            id
+            name
+            subfolders {
+                id
+                name
+            }
+            notes {
+                id
+                title
+                text
+            }
+        }
+        notes {
+            id
+            title
+            text
+        }
+    }
+  }
+`;
+
 // const GET_FOLDERS = gql`
 //     query getFolders($ids: [ID!]) {
 //         folders(ids: $ids) {
@@ -55,4 +87,4 @@ const GET_FOLDER = gql`
 //     }
 // `;
 
-export { GET_FOLDER };
+export { GET_FOLDER, GET_MY_FOLDERS };

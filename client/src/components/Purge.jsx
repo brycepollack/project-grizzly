@@ -12,10 +12,15 @@ import { FaSkull } from "react-icons/fa";
 
 export default function Purge({ user }) {
 
+  // console.log("Purge user: " + user)
+  // console.log("Purge homefolder: " + user.homeFolder)
+
   const navigate = useNavigate();
 
   // maybe better way to get home folder?
   const { loading, error, data } = useQuery(GET_FOLDER, { variables: { id: user.homeFolder }});
+
+  console.log("Purge data: " + data)
 
   const folderIds = data.folder.subfolders.map(i => i.id);
   const noteIds = data.folder.notes.map(i => i.id);

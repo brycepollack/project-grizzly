@@ -6,7 +6,7 @@ import FolderDisplay from "../components/FolderDisplay";
 import AddFolder from "../components/AddFolder";
 import AddNote from "../components/AddNote";
 import FolderPath from "../components/FolderPath";
-import Purge from "../components/Purge";
+//import Purge from "../components/Purge";
 
 
 export default function Folder({ user }) {
@@ -46,7 +46,6 @@ export default function Folder({ user }) {
                     </div>
                     <AddNote parentFolder={data.folder} user={user} sidebar={false} />
                     <AddFolder parentFolder={data.folder} user={user} sidebar={false}/>
-                    <Purge user={user} />
 
                     </div>
 

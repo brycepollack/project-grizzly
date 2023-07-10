@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../style/header.css";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { IconContext } from 'react-icons';
+import GrizzlyIcon from "../img/grizzlyicon.png";
 
 
 
@@ -13,6 +14,9 @@ export default function Header({ user }) {
   };
   return (
     <div id="navbar" className="navbar">
+      <Link className="link" to="/">
+        <img src={GrizzlyIcon} className="grizzlyicon"/>
+      </Link>
       <span className="logo">
         <Link className="link" to="/">
           Grizzly

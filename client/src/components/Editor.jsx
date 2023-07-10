@@ -49,24 +49,24 @@ export default function Editor({ user, note, parentFolder }) {
 
   const [updateFolder] = useMutation(UPDATE_FOLDER)
 
-  async function removeNote() {
-      let noteId = note.id;
-      const { loading, error, data } = await deleteNote();
-      if (loading || error) return;
+  // async function removeNote() {
+  //     let noteId = note.id;
+  //     const { loading, error, data } = await deleteNote();
+  //     if (loading || error) return;
 
-      let subfolderIds = parentFolder.subfolders.map(a => a.id)
-      let noteIds = parentFolder.notes.map(a => a.id);
-      let filteredNoteIds = noteIds.filter(a => a!=noteId)
+  //     let subfolderIds = parentFolder.subfolders.map(a => a.id)
+  //     let noteIds = parentFolder.notes.map(a => a.id);
+  //     let filteredNoteIds = noteIds.filter(a => a!=noteId)
 
-      await updateFolder({ variables: {
-          id: parentFolder.id,
-          name: parentFolder.name,
-          subfolders: subfolderIds,
-          notes: filteredNoteIds
-      }});
+  //     await updateFolder({ variables: {
+  //         id: parentFolder.id,
+  //         name: parentFolder.name,
+  //         subfolders: subfolderIds,
+  //         notes: filteredNoteIds
+  //     }});
 
-      navigate(`/home`);
-  }
+  //     navigate(`/home`);
+  // }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -132,9 +132,7 @@ export default function Editor({ user, note, parentFolder }) {
               Home
           </Link>
 
-          <button className="btn btn-danger btn-lg" onClick={removeNote}>
-            Delete
-          </button>
+          
         </div>
 
         <input

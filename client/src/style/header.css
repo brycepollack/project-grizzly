@@ -15,9 +15,11 @@
   .logo {
     font-family: Arial;
     font-weight: 700;
-    font-size: 1.25rem;
-    line-height: 1.2;
     flex-grow: 1;
+  }
+
+  .logo a {
+    font-size: 20px;
   }
   
   .avatar {
@@ -26,3 +28,10 @@
     border-radius: 50%;
     object-fit: cover;
   }
+
+  .grizzlyicon{
+    width: 30px;
+    height: 30px;
+    margin-right: 1px;
+  }
+  
