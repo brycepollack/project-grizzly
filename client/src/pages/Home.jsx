@@ -10,7 +10,8 @@ import FolderPath from '../components/FolderPath';
 import Purge from '../components/Purge';
 
 export default function Home({ user }) {
-    console.log(user.homeFolder);
+    console.log("user: " + user);
+    console.log("homefolder: " + user.homeFolder);
 
     //console.log("Home - User: " + JSON.stringify(user));
 

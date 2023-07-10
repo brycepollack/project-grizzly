@@ -4,6 +4,8 @@ import "../style/header.css";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { IconContext } from 'react-icons';
 
+
+
 export default function Header({ user }) {
   const logout = () => {
     window.open("http://localhost:8080/auth/logout", "_self");
@@ -13,16 +15,13 @@ export default function Header({ user }) {
     <div id="navbar" className="navbar">
       <span className="logo">
         <Link className="link" to="/">
-          Project Grizzly
+          Grizzly
         </Link>
       </span>
       {user ? (
         <>
-        <a href={`/home`}>
-            <img
-              src={user.image}
-              alt=""
-              className="avatar"></img></a>
+        <a href={`/home`}></a>
+        <>{user.displayName}</>
             <a onClick={logout}>
             <IconContext.Provider value={{className:"hover-btn"}}>
               <BiLogOut size={'1.5em'}/> </IconContext.Provider></a>

@@ -41,7 +41,7 @@ router.post("/local", (req, res, next) => {
         if (err) throw err;
         //console.log(req.user);
         //res.redirect(CLIENT_URL + "/notes");
-        return res.status(302).json({ redirectUrl: CLIENT_URL + "/notes" });
+        return res.status(302).json({ redirectUrl: CLIENT_URL + "/home" });
       });
     }
   })(req, res, next);
@@ -61,7 +61,7 @@ router.get("/google", passport.authenticate("google", { scope: ["profile"], })
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: CLIENT_URL + "/notes",
+    successRedirect: CLIENT_URL + "/home",
     failureRedirect: "/login/failed",
   })
 );
@@ -71,7 +71,7 @@ router.get("/github", passport.authenticate("github", { scope: ["profile"] }));
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    successRedirect: CLIENT_URL + "/notes",
+    successRedirect: CLIENT_URL + "/home",
     failureRedirect: "/login/failed",
   })
 );

@@ -1,0 +1,28 @@
+.left-right-container {
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    width: 100vw; /* Set width to 100% of viewport width */
+    height: 80vh; /* Set height to 100% of viewport height */
+  }
+  
+  .left-half {
+    background-color: #ff9e2c;
+    flex: 1;
+    padding: 1rem;
+    height: 100%;
+  }
+  
+  .right-half {
+    background-color: #b6701e;
+    flex: 1;
+    padding: 1rem;
+    height: 100%;
+  }
+
+  .landing-title {
+    font-family: 'Cabin', sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    color: inherit;
+}

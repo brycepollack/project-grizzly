@@ -1,8 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
-.header-title {
-    font-family: 'Cabin', sans-serif;
-    font-size: 16px;
-    text-decoration: none;
-    color: inherit;
-}
+.navbar {
+    height: 50px;
+    /* background-color: rgba(102, 16, 83, 0.698); */
+    /* color: white; */
+    color: #333;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    border-radius: 0px;
+    margin: 10px 20px;
+    gap: 10px;
+  }
+  
+  .logo {
+    font-family: Arial;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.2;
+    flex-grow: 1;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }

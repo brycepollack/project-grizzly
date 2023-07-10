@@ -8,6 +8,7 @@ const {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
+  GraphQLFloat,
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
@@ -29,6 +30,8 @@ const NoteType = new GraphQLObjectType({
         return User.findById(parent.userId);
       },
     },
+    createdAt: { type: GraphQLFloat },
+    lastEditedAt: { type: GraphQLFloat }
   }),
 });
 
@@ -195,11 +198,13 @@ const mutation = new GraphQLObjectType({
         id: { type: GraphQLNonNull(GraphQLID) },
         title: { type: GraphQLNonNull(GraphQLString) },
         text: { type: GraphQLString },
+        lastEditedAt: { type: GraphQLFloat }
       },
       resolve(parent, args) {
         return Note.findByIdAndUpdate(args.id, {
           title: args.title,
           text: args.text,
+          lastEditedAt: args.lastEditedAt
         });
       },
     },

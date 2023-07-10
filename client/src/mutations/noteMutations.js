@@ -24,8 +24,8 @@ const DELETE_NOTE = gql`
 `;
 
 const UPDATE_NOTE = gql`
-  mutation updateNote( $id: ID!, $title: String!, $text: String!) {
-    updateNote(id: $id, title: $title, text: $text) {
+  mutation updateNote( $id: ID!, $title: String!, $text: String!, $lastEditedAt: Float!) {
+    updateNote(id: $id, title: $title, text: $text, lastEditedAt: $lastEditedAt) {
       id
       title
       text
@@ -34,6 +34,7 @@ const UPDATE_NOTE = gql`
         authId
         displayName
       }
+      lastEditedAt
     }
   }
 `;

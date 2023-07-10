@@ -11,6 +11,8 @@ const GET_NOTES = gql`
         authId
         displayName
       }
+      createdAt
+      lastEditedAt
     }
   }
 `;
@@ -26,6 +28,8 @@ const GET_MY_NOTES = gql`
         authId
         displayName
       }
+      createdAt
+      lastEditedAt
     }
   }
 `;
@@ -41,6 +45,8 @@ const GET_NOTE = gql`
         authId
         displayName
       }
+      createdAt
+      lastEditedAt
     }
   }
 `;

@@ -13,11 +13,12 @@ export default function Editor({ user, note, parentFolder }) {
   const navigate = useNavigate();
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
+  const [lastEditedAt, setLastEditedAt] = useState(Date.now);
   const [preview, setPreview] = useState(false);
   const textareaRef = createRef();
 
   const [updateNote] = useMutation(UPDATE_NOTE, {
-    variables: { id: note.id, title, text },
+    variables: { id: note.id, title, text, lastEditedAt },
     refetchQueries: [{ query: GET_NOTE, variables: { id: note.id } }],
   });
 
@@ -74,7 +75,9 @@ export default function Editor({ user, note, parentFolder }) {
       return alert("Please fill out title");
     }
 
-    updateNote(title, text);
+    setLastEditedAt(Date.now)
+
+    updateNote(title, text, lastEditedAt);
   };
 
   // adjust textarea height on typing

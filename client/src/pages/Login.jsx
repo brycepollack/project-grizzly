@@ -46,26 +46,6 @@ const Login = () => {
     
   };
 
-  // const local = () => {
-
-  //   fetch("http://localhost:8080/auth/local", {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       username: username,
-  //       password: password,
-  //     }),
-  //     credentials: "include",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "Access-Control-Allow-Credentials": true,
-  //     }
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => console.log("Data: " + data))
-  //     .catch((error) => console.error("Error: " + error));
-  // };
-
 
   return (
     <div className="login">

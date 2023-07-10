@@ -63,6 +63,7 @@ const App = () => {
     JSON.parse(window.localStorage.getItem("user"))
   );
 
+  
   useEffect(() => {
     const getUser = () => {
       
@@ -76,7 +77,6 @@ const App = () => {
         },
       })
         .then((response) => {
-          
           if (response.status === 200) return response.json();
           throw new Error("authentication has been failed!");
         })
@@ -111,7 +111,7 @@ const App = () => {
               />
               <Route 
                 path="/home" 
-                element={<Home user={user} />} 
+                element={user ? <Home user={user} /> : <Login />} 
               />
               <Route
                 path="/login"
