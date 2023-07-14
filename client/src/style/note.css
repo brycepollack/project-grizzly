@@ -1,4 +1,5 @@
-.table {
+input:disabled {
+  -webkit-text-fill-color: black;
 }
 
 .table tbody tr td {

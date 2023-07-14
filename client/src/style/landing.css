@@ -1,28 +1,97 @@
-.left-right-container {
-    display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    width: 100vw; /* Set width to 100% of viewport width */
-    height: 80vh; /* Set height to 100% of viewport height */
-  }
-  
-  .left-half {
-    background-color: #ff9e2c;
-    flex: 1;
-    padding: 1rem;
-    height: 100%;
-  }
-  
-  .right-half {
-    background-color: #b6701e;
-    flex: 1;
-    padding: 1rem;
-    height: 100%;
-  }
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100vw; /* Set width to 100% of viewport width */
+  height: auto; /* Set height to 100% of viewport height */
+  align-items: center;
+  margin-top: 5vh;
+  gap: 40px;
+}
 
-  .landing-title {
-    font-family: 'Cabin', sans-serif;
-    font-size: 16px;
-    text-decoration: none;
-    color: inherit;
+.title-half {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 75%;
+  text-align: center;
+}
+
+.editor-half {
+  /* background-color: #b6701e; */
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-half {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+}
+
+.landing-preview-toggle {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.landing-title {
+  font-family: "Cabin", sans-serif;
+  font-size: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.landing-editor-child {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.landing-text-display {
+  /* background-color: aqua; */
+  height: 320px;
+  flex: 1;
+  resize: none;
+  border-radius: 10px;
+  padding: 24px;
+  /* border: solid rgb(182, 182, 182) 2px; */
+  /* background-color: rgb(239, 239, 239); */
+  overflow-y: auto;
+  box-shadow: 0px 0px 10px 2px rgb(234, 234, 234);
+}
+
+.landing-text-display.inactive {
+  display: none;
+}
+
+.feature {
+  flex: 1;
+  /* padding: 16px; */
+  border-radius: 10px;
+  width: 90%;
+  /* box-shadow: 0px 0px 10px 2px rgb(234, 234, 234); */
+  /* border: solid rgb(182, 182, 182) 2px; */
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 4;
+}
+
+#footer {
+  margin-top: 60px;
+}
+
+footer p {
+  text-align: center;
 }

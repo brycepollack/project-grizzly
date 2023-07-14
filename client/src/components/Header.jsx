@@ -24,8 +24,7 @@ export default function Header({ user }) {
       </span>
       {user ? (
         <>
-        <a href={`/home`}></a>
-        <>{user.displayName}</>
+        <a href={`/home`} style={{ color: "inherit"}}>{user.displayName}</a>
             <a onClick={logout}>
             <IconContext.Provider value={{className:"hover-btn"}}>
               <BiLogOut size={'1.5em'}/> </IconContext.Provider></a>

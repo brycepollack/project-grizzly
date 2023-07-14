@@ -2,10 +2,17 @@ import { marked } from 'marked';
 import parse from 'html-react-parser';
 import '../style/preview.css'
 
-export default function Preview({ text }) {
+export default function Preview({ text, show, className }) {
+
+  if (className == null) className = "text-display";
 
   return (
-    <div className="preview text-display">
+    <div 
+    // className={( show ? "preview text-display" : "preview text-display inactive")}
+    className={( show ? `preview ${className}` : `preview ${className} inactive`)}
+    // className="preview text-display" 
+    // style={{ display: ( show ? "block" : "none" ) }}
+    >
         {myParse(text)}
 	</div>
   );

@@ -27,6 +27,7 @@ const GET_FOLDER = gql`
                 id
                 title
                 text
+                lastEditedAt
             }
         }
     }

@@ -2,9 +2,9 @@ import Google from "../img/google.png";
 import Github from "../img/github.png";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
+import "../style/newlogin.css";
 
 const Login = () => {
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +18,7 @@ const Login = () => {
 
   const local = async function (e) {
     e.preventDefault();
-  
+
     const response = await fetch("http://localhost:8080/auth/local", {
       method: "POST",
       body: JSON.stringify({
@@ -30,27 +30,47 @@ const Login = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Access-Control-Allow-Credentials": true,
-      }
-    })
+      },
+    });
     const result = response.json();
     const data = await result;
     const { redirectUrl } = data;
-    if(redirectUrl === "/login/failed"){
+    if (redirectUrl === "/login/failed") {
       setUsername("");
       setPassword("");
       alert("Username/password incorrect. Please try again!");
-    }
-    else{
+    } else {
       window.location.href = redirectUrl;
     }
-    
   };
-
 
   return (
     <div className="login">
+      <h1 className="loginTitle">Welcome back!</h1>
       <div className="wrapper">
-      <h1 className="loginTitle">Choose a Login Method</h1>
+        <div className="right">
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="submit" onClick={local}>
+            Login
+          </button>
+        </div>
+
+        <div className="center">
+          <div className="line" />
+          <div className="or">OR</div>
+        </div>
+
         <div className="left">
           <div className="loginButton google" onClick={google}>
             <img src={Google} alt="" className="icon" />
@@ -60,16 +80,10 @@ const Login = () => {
             <img src={Github} alt="" className="icon" />
             Github
           </div>
-        </div>
-        <div className="center">
-          <div className="line" />
-          <div className="or">OR</div>
-        </div>
-        <div className="right">
-          <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
-          <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
-          <button className="submit" onClick={local}>Login</button>
-          <div>Don't have an account? <a href="http://localhost:3000/signup">Sign up!</a></div>
+          <div className="signup">
+            Don't have an account?{" "}
+            <a href="http://localhost:3000/signup">Sign up!</a>
+          </div>
         </div>
       </div>
     </div>

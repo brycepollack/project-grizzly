@@ -15,6 +15,7 @@ export default function Editor({ user, note, parentFolder }) {
   const [text, setText] = useState(note.text);
   const [lastEditedAt, setLastEditedAt] = useState(Date.now);
   const [preview, setPreview] = useState(false);
+  const [editor, setEditor] = useState(true);
   const textareaRef = createRef();
 
   const [updateNote] = useMutation(UPDATE_NOTE, {
@@ -22,29 +23,8 @@ export default function Editor({ user, note, parentFolder }) {
     refetchQueries: [{ query: GET_NOTE, variables: { id: note.id } }],
   });
 
-  // const [deleteNote] = useMutation(DELETE_NOTE, {
-  //   variables: { id: note.id },
-  //   update(cache, { data: { deleteNote } }) {
-  //         const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
-  //         cache.writeQuery({
-  //           query: GET_MY_NOTES,
-  //           variables: { userId : user._id },
-  //           data: {
-  //             mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
-  //           },
-  //         });
-  //       },
-  //       onCompleted: () => {
-  //         navigate(`/home`);
-  //       }
-  //   });
-
-
   const [deleteNote] = useMutation(DELETE_NOTE, {
       variables: { id: note.id },
-      // update(cache, { data: deleteNote }) {
-      //     cache.evict({ id: `Note:${deleteNote.deleteNote.id}`});
-      // }
   });
 
   const [updateFolder] = useMutation(UPDATE_FOLDER)
@@ -90,7 +70,7 @@ export default function Editor({ user, note, parentFolder }) {
 
   // adjust textarea height on mount
   useEffect(() => {
-    if (!preview) {
+    if (editor) {
       console.log(textareaRef.current.scrollHeight);
       textareaRef.current.style.height = '0px';
 
@@ -100,29 +80,37 @@ export default function Editor({ user, note, parentFolder }) {
         textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
       }
     };
-  }, [preview]);
+  }, [editor, preview]);
+
+  const displayMode = (mode) => {
+    if (mode == 'edit') {
+      if (!editor) {
+        setEditor(true);
+      } else {
+        setPreview(true);
+        setEditor(false);
+      }
+    } else if (mode == 'preview') {
+      if (!preview) {
+        setPreview(true);
+      } else {
+        setEditor(true);
+        setPreview(false);
+      }
+    }
+  }
 
   return (
     <>
       <div className="editor-container">
         <div id="title-container">
-          {/* <h6 id="title-heading">Title: </h6> */}
-          {/* <button id="preview-btn" className="hover-btn" onClick={() => {setPreview(!preview)}}>
-            {preview ? (<AiTwotoneEdit size={'1.2em'}/>) : (<HiEye size={'1.2em'}/>)}
-          </button> */}
-          {/* <PinkSwitch onChange={() => setPreview(!preview)}/> */}
 
           <div className="preview-toggle" >
-            <MdEditDocument className={preview ? "preview-icon inactive" : "preview-icon active"} onClick={() => {setPreview(false)}}/>
+            <MdEditDocument className={editor ? "preview-icon active" : "preview-icon inactive"} onClick={() => displayMode('edit')}/>
             {/* <div className="separator"></div> */}
-            <MdDocumentScanner className={preview ? "preview-icon active" : "preview-icon inactive"} onClick={() => setPreview(true)}/>
+            <MdDocumentScanner className={preview ? "preview-icon active" : "preview-icon inactive"} onClick={() => displayMode('preview')}/>
           </div>
 
-          {/* <button className={preview ? "btn btn-secondary btn-lg preview-btn" : "btn btn-outline-secondary btn-lg preview-btn"} 
-          onClick={() => setPreview(!preview)}
-          onKeyPress={(e) => e.target.blur()}>
-            Preview
-          </button> */}
           
           <button className="btn btn-primary btn-lg" onClick={onSubmit}>
             Save
@@ -143,43 +131,21 @@ export default function Editor({ user, note, parentFolder }) {
             value={title}
             style={{height:"75px", flexGrow: "0", flexShrink: "0"}}
           />
-        {/* <div className="editor"> */}
-
-          {/* <div className="editor-child">
-            
-          </div> */}
-          <div className="editor-child">
-            {preview ? (<Preview text={text} />) : (<textarea 
+          <div className="editor-child"
+          style={{ gap: ( editor && preview ? "10px" : "0px") }}>
+            <textarea 
             ref={textareaRef}
             type="text" 
             value={text} 
-            style={{}}
-            className="text-display"
+            // style={{ display: (editor ? "block" : "none") }}
+            // className="text-display"
+            className={( editor? "text-display" : "text-display inactive")}
             placeholder="Start typing here..." 
-            onChange={onChangeHandler} />) }
+            onChange={onChangeHandler} />
+            <Preview text={text} show={preview}/>
             
           </div>
-          {/* <div className="editor-child border rounded">
-            <textarea
-              className="text-display"
-              style={{ resize: "none" }}
-              id="input"
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-            />
-          </div>
-
-          <div
-            className="editor-child border rounded"
-            style={{
-              overflow: "auto",
-            }}
-          >
-            <Preview text={text} />
-          </div> */}
         </div>
-      {/* </div> */}
       
     </>
   );

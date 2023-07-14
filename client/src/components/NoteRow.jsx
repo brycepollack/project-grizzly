@@ -15,6 +15,11 @@ export default function NoteRow({ parentFolder, note, user }) {
     const [title, setTitle] = useState(note.title);
     const textarea = createRef();
     const [editing, setEditing] = useState(false);
+
+    var converted = new Date(note.lastEditedAt)
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    var timeString = converted.toLocaleString("en-US", options)
+
     
     const [deleteNote] = useMutation(DELETE_NOTE, {
         variables: { id: note.id },
@@ -89,7 +94,7 @@ export default function NoteRow({ parentFolder, note, user }) {
                 <MdInsertDriveFile className='row-icon'/>
                 <input ref={textarea} disabled={true} type="text" value={title} onChange={(e) => setTitle(e.target.value)} onKeyDown={handleOnKeyDown}></input>
             </td>
-            <td style={{ textAlign: 'center'}}><div className='last-edited'>Jun 27, 2023 9:03 pm</div></td>
+            <td style={{ textAlign: 'center'}}><div className='last-edited'>{timeString}</div></td>
             <td style={{ textAlign: 'center'}}>
                 {/* <a href={`/notes/${note.id}`}> */}
             <IconContext.Provider value={{style:{color:"green"}, className:"edit-btn"}}>

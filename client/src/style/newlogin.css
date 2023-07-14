@@ -1,33 +1,32 @@
 .login {
-  height: calc(100vh - 50px);
+  height: calc(100vh - 70px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login h1 {
+  margin: 0px 0px 32px;
+  font-size: 1.6em;
 }
 
 .wrapper {
-  width: 60%;
-  height: 75%;
-  -webkit-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  -moz-box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  box-shadow: 0px 5px 33px -21px rgba(66, 68, 90, 1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
+    width: 100%;
+    max-width: 320px;
 }
 
 .left,
 .right {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  gap: 16px;
 }
 
 .center {
-  height: 100%;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,17 +34,14 @@
 }
 
 .or {
-  border: 2px solid lightgray;
-  border-radius: 50%;
   padding: 10px;
   color: gray;
   background-color: white;
-  font-weight: bold;
+  font-size: 0.75em;
 }
 
 .line {
-  width: 0.5px;
-  height: 70%;
+  height: 0.5px;
   background-color: lightgray;
   position: absolute;
   top: 0;
@@ -57,20 +53,20 @@
 }
 
 .loginButton {
-  width: 150px;
-  padding: 15px 25px;
-  border-radius: 5px;
+  height: 48px;
   color: white;
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-weight: bold;
-  cursor: pointer;
+  gap: 16px;
+  color: white;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
 }
 
-.right input {
-  padding: 12px 16px;
-  border-radius: 8px;
-  border: none;
+.loginButton img {
+  height: 24px;
 }
 
 .google {
@@ -83,28 +79,42 @@
   background-color: black;
 }
 
-.icon {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-}
-
 .submit {
-  width: 200px;
-  background-color: rgba(128, 0, 128, 0.671);
+  background-color: black;
   color: white;
-  font-weight: bold;
+  border-radius: 8px;
+  padding: 12px;
+  height: 48px;
+  margin: 24px 0px 0px;
+}
+button {
+  outline: none;
   border: none;
-  padding: 15px 20px;
-  border-radius: 5px;
+}
+button:active {
+  border-style: outset;
 }
 
-.loginTitle {
-  position: absolute;
-  top: 175px;
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
-@media screen and (max-width: 992px) {
+input {
+  padding: 12px 0px;
+  border: none;
+  border-bottom: 1px solid rgb(210, 210, 210);
+}
+
+input:focus {
+  border-bottom: 1px solid black;
+}
+
+.signup {
+  text-align: center;
+}
+
+/* @media screen and (max-width: 992px) {
   .login {
     display: flex;
     flex-direction: column;
@@ -142,4 +152,4 @@
     height: 0.5px;
     width: 300px;
   }
-}
+} */

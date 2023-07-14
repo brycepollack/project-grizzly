@@ -124,7 +124,7 @@ export default function FolderRow({ parentFolder, folder, user }) {
                 {/* {editing ? <RxCheck className='row-icon' onClick={completeEdit}/> : } */}
             <input ref={textarea} disabled={true} type="text" value={name} onChange={(e) => setName(e.target.value)} onKeyDown={handleOnKeyDown}></input>
             </td>
-            <td style={{ textAlign: 'center'}}><div className='last-edited'>Jun 27, 2023 9:03 pm</div></td>
+            <td style={{ textAlign: 'center'}}><div className='last-edited'>--</div></td>
             <td style={{ textAlign: 'center'}}>
                 {/* <a href={`/notes/${note.id}`}> */}
             <IconContext.Provider value={{style:{color:"green"}, className:"edit-btn"}}>
