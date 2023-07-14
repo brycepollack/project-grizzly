@@ -20,11 +20,11 @@ export default function Folder({ user }) {
 
     var path = JSON.parse(localStorage.getItem("path"));
     // let index = path.indexOf(data.folder.name);
-    let index = path.findIndex(item => item.id == data.folder.id);
+    let index = path.findIndex(item => item.id === data.folder.id);
 
     // console.log(index);
 
-    if (index == -1) {
+    if (index === -1) {
         path = [...path, data.folder];
         localStorage.setItem("path", JSON.stringify(path));
     } else if (index >= 0 && index < path.length - 1) {

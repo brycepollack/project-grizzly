@@ -23,16 +23,7 @@ export default function NoteRow({ parentFolder, note, user }) {
     
     const [deleteNote] = useMutation(DELETE_NOTE, {
         variables: { id: note.id },
-        // update(cache, { data: { deleteNote } }) {
-        //     const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
-        //     cache.writeQuery({
-        //     query: GET_MY_NOTES,
-        //     variables: { userId : user._id },
-        //     data: {
-        //         mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
-        //     },
-        //     });
-        // },
+        
         update(cache, { data: deleteNote }) {
             cache.evict({ id: `Note:${deleteNote.deleteNote.id}`});
         }
@@ -74,12 +65,11 @@ export default function NoteRow({ parentFolder, note, user }) {
     }
 
     const handleClick = () => {
-        console.log("row " + note.title);
         if (!editing) navigate(`/note/${note.id}`, {state: { folder: parentFolder }});
     }
 
     const handleOnKeyDown = (e) => {
-        if (e.keyCode == 13) completeEdit();
+        if (e.keyCode === 13) completeEdit();
     }
 
     const startEdit = () => {

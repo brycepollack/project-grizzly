@@ -1,9 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_FOLDER, UPDATE_FOLDER } from "../mutations/folderMutations";
 // import { ADD_NOTE } from "../mutations/noteMutations";
 // import { GET_NOTES, GET_MY_NOTES } from "../queries/noteQueries";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { MdCreateNewFolder } from 'react-icons/md';
 import { IconContext } from "react-icons";
 import { GET_FOLDER } from "../queries/folderQueries";
@@ -16,12 +16,12 @@ export default function AddFolder({ user, parentFolder, sidebar }) {
 
   const [folderName, setFolderName] = useState("Untitled Folder");
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const name = "Untitled folder"
+  const name = "Untitled folder"
 
-    const [addFolder] = useMutation(ADD_FOLDER, {
-        variables: { name : folderName, userId : user._id, subfolders : [], notes : []},
+  const [addFolder] = useMutation(ADD_FOLDER, {
+      variables: { name : folderName, userId : user._id, subfolders : [], notes : []},
         // update(cache, { data: { addNote } }) {
         // const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
         // cache.writeQuery({
@@ -33,7 +33,7 @@ export default function AddFolder({ user, parentFolder, sidebar }) {
         // onCompleted: (data) => {
         //   console.log(data);
         // }
-    });
+  });
 
     // will need to update cache
     const [updateFolder] = useMutation(UPDATE_FOLDER);

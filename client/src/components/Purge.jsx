@@ -20,12 +20,8 @@ export default function Purge({ user }) {
   // maybe better way to get home folder?
   const { loading, error, data } = useQuery(GET_FOLDER, { variables: { id: user.homeFolder }});
 
-  console.log("Purge data: " + data)
-
   const folderIds = data.folder.subfolders.map(i => i.id);
   const noteIds = data.folder.notes.map(i => i.id);
-
-  console.log(folderIds);
 
   const [deleteNote] = useMutation(DELETE_NOTE);
   const [deleteFolder] = useMutation(DELETE_FOLDER);

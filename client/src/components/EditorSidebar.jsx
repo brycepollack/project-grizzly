@@ -1,20 +1,12 @@
 import { useState } from "react";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_MY_NOTES } from "../queries/noteQueries";
 import { GET_MY_FOLDERS } from "../queries/folderQueries";
 import Spinner from "./Spinner";
-import { ADD_NOTE } from "../mutations/noteMutations";
 import { useNavigate } from "react-router-dom";
 
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { MdClose, MdExpandMore, MdViewSidebar } from "react-icons/md";
 import { BsList } from "react-icons/bs";
-import { IoCaretForward } from "react-icons/io5";
-import AddNote from "./AddNote";
-import AddFolder from "./AddFolder";
 //import Purge from "./Purge";
 
 export default function EditorSidebar({ user, currNote, parentFolder }) {
@@ -26,7 +18,6 @@ export default function EditorSidebar({ user, currNote, parentFolder }) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => {
-    console.log(sidebar);
     setSidebar(!sidebar);
   };
 

@@ -14,14 +14,14 @@ export default function Landing() {
   );
 
   const displayMode = (mode) => {
-    if (mode == "edit") {
+    if (mode === "edit") {
       if (!editor) {
         setEditor(true);
       } else {
         setPreview(true);
         setEditor(false);
       }
-    } else if (mode == "preview") {
+    } else if (mode === "preview") {
       if (!preview) {
         setPreview(true);
       } else {

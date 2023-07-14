@@ -1,11 +1,9 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_NOTE } from "../mutations/noteMutations";
-import { GET_NOTES, GET_MY_NOTES } from "../queries/noteQueries";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { UPDATE_FOLDER } from "../mutations/folderMutations";
 import { GET_FOLDER } from "../queries/folderQueries"
-import { MdCreateNewFolder } from 'react-icons/md';
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
 import { IconContext } from "react-icons";
 
@@ -38,7 +36,6 @@ export default function AddNote({ parentFolder, user, sidebar }) {
     let newNoteId = null;
     const { loading, error, data } = await addNote();
     if (!loading && !error) newNoteId = data.addNote.id;
-    console.log("NEW NOTE ID: " + newNoteId + "\nNEW NOTE TITLE: " + data.addNote.title);
 
     let subfolderIds = parentFolder.subfolders.map(a => a.id)
     let noteIds = parentFolder.notes.map(a => a.id);

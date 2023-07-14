@@ -1,7 +1,6 @@
-import { MdCheck, MdDelete, MdModeEdit, MdFolder, MdDoneOutline } from 'react-icons/md'
+import { MdDelete, MdModeEdit, MdFolder } from 'react-icons/md'
 import { HiCheck } from 'react-icons/hi'
-import { FaTrash, FaEdit, FaCheck } from 'react-icons/fa'
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 // import { DELETE_NOTE } from '../mutations/noteMutations';
 // import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
 import { IconContext } from 'react-icons';
@@ -12,19 +11,6 @@ import { GET_FOLDER } from '../queries/folderQueries';
 
 export default function FolderRow({ parentFolder, folder, user }) {
     
-    // const [deleteNote] = useMutation(DELETE_NOTE, {
-    //     variables: { id: note.id },
-    //     update(cache, { data: { deleteNote } }) {
-    //         const { mynotes } = cache.readQuery({ query: GET_MY_NOTES, variables: { userId : user._id } });
-    //         cache.writeQuery({
-    //         query: GET_MY_NOTES,
-    //         variables: { userId : user._id },
-    //         data: {
-    //             mynotes: mynotes.filter((note) => note.id !== deleteNote.id),
-    //         },
-    //         });
-    //     },
-    // });
 
     const [editing, setEditing] = useState(false);
     const [name, setName] = useState(folder.name);
@@ -52,7 +38,6 @@ export default function FolderRow({ parentFolder, folder, user }) {
     });
 
     const handleClick = () => {
-        console.log("folder: " + folder.name);
         if (!editing) navigate(`/folder/${folder.id}`);
     }
 
@@ -79,7 +64,7 @@ export default function FolderRow({ parentFolder, folder, user }) {
     const handleOnKeyDown = (e) => {
         let key = e.keyCode;
         // console.log("key down: " + key);
-        if (key == 13) completeEdit();
+        if (key === 13) completeEdit();
     }
 
     const [deleteFolder] = useMutation(DELETE_FOLDER, {

@@ -5,7 +5,6 @@ const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const connectDB = require("./config/db");
-//const MongoStore = require("connect-mongo");
 const port = process.env.PORT || 8080;
 
 const passport = require("passport");
@@ -81,5 +80,7 @@ app.use(
 );
 
 app.use("/auth", authRoutes);
+
+app.enable("trust proxy");
 
 app.listen(port, console.log(`Server running on port ${port}`));

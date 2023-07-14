@@ -4,22 +4,27 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import "../style/newlogin.css";
 
-const Login = () => {
+const Login = ({isDev}) => {
+
+  const API_BASE_URL = isDev ? 'http://localhost:8080' : 'https://grizzly.fly.dev';
+  //const API_BASE_URL = 'http://localhost:8080';
+  console.log("LOGIN api base url: " + API_BASE_URL)
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const google = () => {
-    window.open("http://localhost:8080/auth/google", "_self");
+    window.open(API_BASE_URL + "/auth/google", "_self");
   };
 
   const github = () => {
-    window.open("http://localhost:8080/auth/github", "_self");
+    window.open(API_BASE_URL + "/auth/github", "_self");
   };
 
   const local = async function (e) {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:8080/auth/local", {
+    const response = await fetch(API_BASE_URL + "/auth/local", {
       method: "POST",
       body: JSON.stringify({
         username: username,

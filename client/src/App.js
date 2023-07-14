@@ -4,7 +4,6 @@ import {
   ApolloProvider,
   ApolloClient,
   InMemoryCache,
-  createHttpLink,
   from,
   HttpLink
 } from "@apollo/client";
@@ -14,7 +13,6 @@ import {
   Route,
   Routes,
   Navigate,
-  Redirect,
 } from "react-router-dom";
 
 import Header from "./components/Header";
@@ -24,6 +22,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Folder from "./pages/Folder";
 import Landing from "./pages/Landing";
+
+const isDev = false;
+
+const API_BASE_URL = isDev ? 'http://localhost:8080' : 'https://grizzly.fly.dev';
+//const API_BASE_URL ='http://localhost:8080';
+console.log("APP api base url: " + API_BASE_URL)
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -49,7 +53,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
-const httpLink = new HttpLink({ uri: 'http://localhost:8080/graphql' });
+const httpLink = new HttpLink({ uri: API_BASE_URL + "/graphql" });
 
 const client = new ApolloClient({
   uri: httpLink,
@@ -67,7 +71,7 @@ const App = () => {
   useEffect(() => {
     const getUser = () => {
       
-      fetch("http://localhost:8080/auth/login/success", {
+      fetch( API_BASE_URL + "/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -95,15 +99,11 @@ const App = () => {
     getUser();
   }, []);
 
-  //console.log("App - User: " + JSON.stringify(user));
-
-  // MINOR PROBLEM: ON FIRST LOGIN USER IS STILL REDIRECTED BACK TO LOGIN PAGE
-
   return (
     <>
       <ApolloProvider client={client}>
         <Router>
-          <Header user={user} />
+          <Header user={user} isDev={isDev} />
             <Routes>
               <Route 
                 path="/"
@@ -111,11 +111,11 @@ const App = () => {
               />
               <Route 
                 path="/home" 
-                element={user ? <Home user={user} /> : <Login />} 
+                element={user ? <Home user={user} /> : <Login isDev={isDev} />} 
               />
               <Route
                 path="/login"
-                element={user ? <Navigate to="/notes" /> : <Login />}
+                element={user ? <Navigate to="/notes" /> : <Login isDev={isDev} />}
               />
               <Route
                 path="/note/:id"

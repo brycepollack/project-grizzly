@@ -1,16 +1,15 @@
 import { useState, useEffect, createRef } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
-import { GET_NOTE, GET_MY_NOTES } from "../queries/noteQueries";
+import { GET_NOTE } from "../queries/noteQueries";
 import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
 import { UPDATE_FOLDER } from "../mutations/folderMutations";
 import '../style/editor.css'
 import Preview from "./Preview";
 
-import { MdOutlineDocumentScanner, MdDocumentScanner, MdEditDocument } from 'react-icons/md'
+import { MdDocumentScanner, MdEditDocument } from 'react-icons/md'
 
 export default function Editor({ user, note, parentFolder }) {
-  const navigate = useNavigate();
   const [title, setTitle] = useState(note.title);
   const [text, setText] = useState(note.text);
   const [lastEditedAt, setLastEditedAt] = useState(Date.now);
@@ -29,24 +28,6 @@ export default function Editor({ user, note, parentFolder }) {
 
   const [updateFolder] = useMutation(UPDATE_FOLDER)
 
-  // async function removeNote() {
-  //     let noteId = note.id;
-  //     const { loading, error, data } = await deleteNote();
-  //     if (loading || error) return;
-
-  //     let subfolderIds = parentFolder.subfolders.map(a => a.id)
-  //     let noteIds = parentFolder.notes.map(a => a.id);
-  //     let filteredNoteIds = noteIds.filter(a => a!=noteId)
-
-  //     await updateFolder({ variables: {
-  //         id: parentFolder.id,
-  //         name: parentFolder.name,
-  //         subfolders: subfolderIds,
-  //         notes: filteredNoteIds
-  //     }});
-
-  //     navigate(`/home`);
-  // }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -71,7 +52,6 @@ export default function Editor({ user, note, parentFolder }) {
   // adjust textarea height on mount
   useEffect(() => {
     if (editor) {
-      console.log(textareaRef.current.scrollHeight);
       textareaRef.current.style.height = '0px';
 
       if (text.length === 0) {
@@ -80,17 +60,17 @@ export default function Editor({ user, note, parentFolder }) {
         textareaRef.current.style.height = textareaRef.current.scrollHeight + "px";
       }
     };
-  }, [editor, preview]);
+  }, [editor, preview, text.length, textareaRef]);
 
   const displayMode = (mode) => {
-    if (mode == 'edit') {
+    if (mode === 'edit') {
       if (!editor) {
         setEditor(true);
       } else {
         setPreview(true);
         setEditor(false);
       }
-    } else if (mode == 'preview') {
+    } else if (mode === 'preview') {
       if (!preview) {
         setPreview(true);
       } else {
