@@ -12,6 +12,7 @@ const app = express();
 const { authRoutes } = require("./routes/auth");
 const isDev = require("./config/isDev");
 const ORIGIN_URL = isDev ? "http://localhost:3000" : "https://project-grizzly.pages.dev";
+console.log("Origin: " + ORIGIN_URL);
 
 // Connect to database
 connectDB();
@@ -28,6 +29,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use((req, res, next) => {
+  console.log('Custom middleware');
+  next();
+});
 
 app.use(
   cors({

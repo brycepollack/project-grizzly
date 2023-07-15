@@ -33,9 +33,9 @@ export default function Header({ user, isDev }) {
                 <BiLogOut size={'1.5em'}/> </IconContext.Provider></div>
         </>
       ) : (
-        <div style={{color:"black"}} href={`/login`}>
+        <a style={{color:"black"}} href={`/login`}>
         <IconContext.Provider value={{className:"hover-btn"}}>
-          <BiLogIn size={'1.5em'}/> </IconContext.Provider></div>
+          <BiLogIn size={'1.5em'}/> </IconContext.Provider></a>
       )}
     </div>
   );
