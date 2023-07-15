@@ -111,11 +111,11 @@ const App = () => {
               />
               <Route 
                 path="/home" 
-                element={user ? <Home user={user} /> : <Login isDev={isDev} />} 
+                element={user ? <Home user={user} /> : <Navigate to="/login" />} 
               />
               <Route
                 path="/login"
-                element={user ? <Navigate to="/notes" /> : <Login isDev={isDev} />}
+                element={user ? <Navigate to="/home" /> : <Login isDev={isDev} />}
               />
               <Route
                 path="/note/:id"
@@ -123,7 +123,7 @@ const App = () => {
               />
               <Route
                 path="/signup"
-                element={user ? <Navigate to="/notes" /> : <Signup />}
+                element={user ? <Navigate to="/home" /> : <Signup />}
               />
               <Route 
                 path="/folder/:id"
