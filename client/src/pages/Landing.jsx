@@ -112,7 +112,7 @@ export default function Landing() {
               <p>Jump to files, folders, or make new ones from the sidebar while editing!</p>
             </div>
             <div style={{ flex: "6"}}>
-              <img src={sidebar} style={{ width: "100%" }} />
+              <img src={sidebar} alt="" style={{ width: "100%" }} />
             </div>
           </div>
 

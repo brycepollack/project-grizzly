@@ -3,7 +3,6 @@ import { ADD_USER } from "../mutations/userMutations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/newlogin.css"
-import { ADD_FOLDER } from "../mutations/folderMutations";
 
 const Signup = () => {
 
@@ -16,10 +15,6 @@ const Signup = () => {
     const [addUser] = useMutation(ADD_USER, {
         variables: { authId : username, password : password, displayName : username, },
     });
-    // const [addFolder] = useMutation(ADD_FOLDER, {
-    //     variables: { name: "home", userId: "", subFolders: [], notes: [] }
-    // });
-
     
     const registerUser = (e) => {
         if(password !== passwordCheck){
