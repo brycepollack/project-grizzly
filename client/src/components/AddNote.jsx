@@ -1,7 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { ADD_NOTE } from "../mutations/noteMutations";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 import { UPDATE_FOLDER } from "../mutations/folderMutations";
 import { GET_FOLDER } from "../queries/folderQueries"
 import { BsFillFileEarmarkPlusFill } from 'react-icons/bs'
@@ -9,7 +8,7 @@ import { IconContext } from "react-icons";
 
 export default function AddNote({ parentFolder, user, sidebar }) {
 
-  const [noteTitle, setNoteTitle] = useState("Untitled Note");
+  const noteTitle = "Untitled Note";
 
   //console.log("AddNote - User: " + JSON.stringify(user));
 
@@ -82,11 +81,11 @@ export default function AddNote({ parentFolder, user, sidebar }) {
     <>
     {/* <input type="text" placeholder="Untitled note" onChange={(e) => setNoteTitle(e.target.value)} /> */}
 
-    <a onClick={createNote}>
+    <div onClick={createNote}>
     <IconContext.Provider value={{className:"add-btn"}}>
       <BsFillFileEarmarkPlusFill />
     </IconContext.Provider>
-    </a>
+    </div>
     {/* <button className="add-btn" onClick={createNote}>
       <BsFillFileEarmarkPlusFill />
     </button> */}

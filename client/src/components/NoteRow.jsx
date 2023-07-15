@@ -1,8 +1,7 @@
 import { MdDelete, MdModeEdit, MdInsertDriveFile } from 'react-icons/md'
-import { FaTrash, FaEdit } from 'react-icons/fa'
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { DELETE_NOTE, UPDATE_NOTE } from '../mutations/noteMutations';
-import { GET_NOTES, GET_MY_NOTES, GET_NOTE } from '../queries/noteQueries';
+import { GET_NOTE } from '../queries/noteQueries';
 import { IconContext } from 'react-icons';
 import { UPDATE_FOLDER } from '../mutations/folderMutations';
 import { useNavigate } from 'react-router-dom';
@@ -33,12 +32,12 @@ export default function NoteRow({ parentFolder, note, user }) {
 
     async function removeNote() {
         let noteId = note.id;
-        const { loading, error, data} = await deleteNote();
+        const { loading, error } = await deleteNote();
         if (loading || error) return;
 
         let subfolderIds = parentFolder.subfolders.map(a => a.id)
         let noteIds = parentFolder.notes.map(a => a.id);
-        let filteredNoteIds = noteIds.filter(a => a!=noteId)
+        let filteredNoteIds = noteIds.filter(a => a!==noteId)
         await updateFolder({ variables: {
             id: parentFolder.id,
             name: parentFolder.name,
@@ -93,11 +92,11 @@ export default function NoteRow({ parentFolder, note, user }) {
                 {/* </a> */}
             </td>
             <td style={{ textAlign: 'center'}}>
-                <a onClick={removeNote}>
+                <div onClick={removeNote}>
             <IconContext.Provider value={{className:"delete-btn"}}>
                 <MdDelete />
                 </IconContext.Provider>
-                </a>
+                </div>
             </td>
         </tr>
     );

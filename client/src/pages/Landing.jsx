@@ -2,7 +2,6 @@ import "../style/landing.css";
 import Preview from "../components/Preview";
 import { useState } from "react";
 import { MdDocumentScanner, MdEditDocument } from "react-icons/md";
-import placeholder from "../img/placeholder.jpg";
 import file from "../img/feature-file.png";
 import login from "../img/feature-login.png"
 
@@ -104,13 +103,13 @@ export default function Landing() {
               <p>Sign up with Google, Github, or create an account with us!</p>
             </div>
             <div style={{ flex: "6"}}>
-              <img src={login} style={{ width: "100%" }} />
+              <img src={login} alt="" style={{ width: "100%" }} />
             </div>
           </div>
 
           <div className="feature">
             <div style={{ flex:"6"}}>
-              <img src={file} style={{ width: "100%" }} />
+              <img src={file} alt="" style={{ width: "100%" }} />
             </div>
             <div className="feature-text">
               <h3>File system</h3>

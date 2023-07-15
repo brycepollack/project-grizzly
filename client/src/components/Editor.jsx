@@ -1,9 +1,8 @@
 import { useState, useEffect, createRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { GET_NOTE } from "../queries/noteQueries";
-import { UPDATE_NOTE, DELETE_NOTE } from "../mutations/noteMutations";
-import { UPDATE_FOLDER } from "../mutations/folderMutations";
+import { UPDATE_NOTE } from "../mutations/noteMutations";
 import '../style/editor.css'
 import Preview from "./Preview";
 
@@ -21,12 +20,6 @@ export default function Editor({ user, note, parentFolder }) {
     variables: { id: note.id, title, text, lastEditedAt },
     refetchQueries: [{ query: GET_NOTE, variables: { id: note.id } }],
   });
-
-  const [deleteNote] = useMutation(DELETE_NOTE, {
-      variables: { id: note.id },
-  });
-
-  const [updateFolder] = useMutation(UPDATE_FOLDER)
 
 
   const onSubmit = (e) => {

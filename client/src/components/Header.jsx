@@ -1,5 +1,5 @@
 //import logo from './assets/logo.png';
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style/header.css";
 import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { IconContext } from 'react-icons';
@@ -18,7 +18,7 @@ export default function Header({ user, isDev }) {
   return (
     <div id="navbar" className="navbar">
       <Link className="link" to="/">
-        <img src={GrizzlyIcon} className="grizzlyicon"/>
+        <img src={GrizzlyIcon} alt="" className="grizzlyicon"/>
       </Link>
       <span className="logo">
         <Link className="link" to="/">
@@ -27,16 +27,15 @@ export default function Header({ user, isDev }) {
       </span>
       {user ? (
         <>
-        <a href={`/home`} style={{ color: "inherit"}}>{user.displayName}</a>
-            <a onClick={logout}>
-            <IconContext.Provider value={{className:"hover-btn"}}>
-              <BiLogOut size={'1.5em'}/> </IconContext.Provider></a>
-              
-              </>
+          <a href={`/home`} style={{ color: "inherit"}}>{user.displayName}</a>
+              <a onClick={logout}>
+              <IconContext.Provider value={{className:"hover-btn"}}>
+                <BiLogOut size={'1.5em'}/> </IconContext.Provider></a>
+        </>
       ) : (
-        <a style={{color:"black"}} href={`/login`}>
+        <div style={{color:"black"}} href={`/login`}>
         <IconContext.Provider value={{className:"hover-btn"}}>
-          <BiLogIn size={'1.5em'}/> </IconContext.Provider></a>
+          <BiLogIn size={'1.5em'}/> </IconContext.Provider></div>
       )}
     </div>
   );

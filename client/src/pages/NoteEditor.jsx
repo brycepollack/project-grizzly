@@ -1,11 +1,9 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import Editor from "../components/Editor";
 import EditorSidebar from "../components/EditorSidebar"
 import { useQuery } from "@apollo/client";
 import { GET_NOTE } from "../queries/noteQueries";
-import { useState } from "react";
-import { GET_FOLDER } from "../queries/folderQueries";
 
 export default function NoteEditor({ user }) {
   const { id } = useParams();

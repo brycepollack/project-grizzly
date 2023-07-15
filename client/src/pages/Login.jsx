@@ -1,7 +1,6 @@
 import Google from "../img/google.png";
 import Github from "../img/github.png";
 import { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
 import "../style/newlogin.css";
 
 const Login = ({isDev}) => {

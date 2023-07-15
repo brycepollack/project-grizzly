@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../mutations/userMutations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";

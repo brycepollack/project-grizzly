@@ -21,8 +21,6 @@ export default function EditorSidebar({ user, currNote, parentFolder }) {
     setSidebar(!sidebar);
   };
 
-  const navigate = useNavigate();
-
   if (myNotesRes.loading) return <Spinner />;
   if (myNotesRes.error) return <p>Something went wrong</p>;
   if (myFoldersRes.loading) return <Spinner />;

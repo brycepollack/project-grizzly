@@ -1,10 +1,9 @@
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import NoteRow from './NoteRow';
-import { GET_NOTES, GET_MY_NOTES } from '../queries/noteQueries';
+import { GET_MY_NOTES } from '../queries/noteQueries';
 import Spinner from './Spinner';
 import '../style/note.css'
 
-import { GET_FOLDER } from '../queries/folderQueries';
 
 
 export default function NotesDisplay({ user }) {

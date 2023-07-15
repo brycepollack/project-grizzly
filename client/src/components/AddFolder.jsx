@@ -3,7 +3,6 @@ import { ADD_FOLDER, UPDATE_FOLDER } from "../mutations/folderMutations";
 // import { ADD_NOTE } from "../mutations/noteMutations";
 // import { GET_NOTES, GET_MY_NOTES } from "../queries/noteQueries";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
 import { MdCreateNewFolder } from 'react-icons/md';
 import { IconContext } from "react-icons";
 import { GET_FOLDER } from "../queries/folderQueries";
@@ -14,11 +13,9 @@ export default function AddFolder({ user, parentFolder, sidebar }) {
 
   //console.log("AddNote - User: " + JSON.stringify(user));
 
-  const [folderName, setFolderName] = useState("Untitled Folder");
+  const folderName = "Untitled Folder";
 
   const navigate = useNavigate();
-
-  const name = "Untitled folder"
 
   const [addFolder] = useMutation(ADD_FOLDER, {
       variables: { name : folderName, userId : user._id, subfolders : [], notes : []},
@@ -70,11 +67,11 @@ export default function AddFolder({ user, parentFolder, sidebar }) {
   return (
     <>
     {/* <input type="text" placeholder="Untitled folder" onChange={(e) => {setFolderName(e.target.value)}} /> */}
-    <a onClick={createFolder}>
+    <div onClick={createFolder}>
     <IconContext.Provider value={{className:"hover-btn"}}>
       <MdCreateNewFolder />
     </IconContext.Provider>
-    </a>
+    </div>
     {/* <button className="add-btn" onClick={createFolder}>
       <MdCreateNewFolder />
     </button> */}

@@ -1,8 +1,7 @@
-import NotesDisplay from '../components/NotesDisplay';
 import AddNote from '../components/AddNote';
 import AddFolder from '../components/AddFolder';
 
-import { gql, useQuery } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { GET_FOLDER } from '../queries/folderQueries';
 import Spinner from '../components/Spinner';
 import FolderDisplay from '../components/FolderDisplay'

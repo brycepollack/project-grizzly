@@ -80,15 +80,13 @@ export default function FolderRow({ parentFolder, folder, user }) {
         let removedId = folder.id;
         // console.log(removedId);
 
-        const { loading, error, data } = await deleteFolder();
+        const { loading, error } = await deleteFolder();
+        if (loading || error) return;
 
         let origIds = parentFolder.subfolders.map((f) => (f.id))
-        // console.log("orig ids:");
-        // console.log(origIds)
 
         let filteredIds = origIds.filter( (id) => (id !== removedId));
-        // console.log("filtered ids:");
-        // console.log(filteredIds)
+        
         let parentNoteIds = parentFolder.notes.map((n) => (n.id));
 
         updateFolder({
@@ -117,10 +115,10 @@ export default function FolderRow({ parentFolder, folder, user }) {
                 {/* </a> */}
             </td>
             <td style={{ textAlign: 'center'}}>
-                <a onClick={removeFolder}>
+                <div onClick={removeFolder}>
             <IconContext.Provider value={{className:"delete-btn"}}>
                 <MdDelete /></IconContext.Provider>
-                </a>
+                </div>
             </td>
         </tr>
     );
