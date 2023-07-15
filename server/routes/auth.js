@@ -1,7 +1,7 @@
 const passport = require("passport");
 const router = require("express").Router();
 const isDev = require("../config/isDev");
-const CLIENT_URL = isDev ? "http://localhost:3000" : "https://2604f884.project-grizzly.pages.dev";
+const CLIENT_URL = isDev ? "http://localhost:3000" : "https://project-grizzly.pages.dev";
 
 router.get("/login/failed", (req, res) => {
   res.status(401).json({

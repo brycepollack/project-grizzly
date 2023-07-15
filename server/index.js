@@ -11,7 +11,7 @@ require("./config/passport");
 const app = express();
 const { authRoutes } = require("./routes/auth");
 const isDev = require("./config/isDev");
-const ORIGIN_URL = isDev ? "http://localhost:3000" : "https://2604f884.project-grizzly.pages.dev";
+const ORIGIN_URL = isDev ? "http://localhost:3000" : "https://project-grizzly.pages.dev";
 
 // Connect to database
 connectDB();
