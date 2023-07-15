@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { GET_MY_NOTES } from "../queries/noteQueries";
 import { GET_MY_FOLDERS } from "../queries/folderQueries";
 import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
 
 import { IconContext } from "react-icons";
 import { BsList } from "react-icons/bs";
