@@ -23,7 +23,7 @@ import Signup from "./pages/Signup";
 import Folder from "./pages/Folder";
 import Landing from "./pages/Landing";
 
-const isDev = true;
+const isDev = false;
 
 const API_BASE_URL = isDev ? 'http://localhost:8080' : 'https://grizzly.fly.dev';
 //const API_BASE_URL ='http://localhost:8080';
