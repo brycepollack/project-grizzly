@@ -1,38 +1,20 @@
 require("dotenv").config();
 const express = require("express");
-const colors = require("colors");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const connectDB = require("./config/db");
 const port = process.env.PORT || 8080;
-
 const passport = require("passport");
 const cookieSession = require("cookie-session");
 require("./config/passport");
-
 const app = express();
-
 const { authRoutes } = require("./routes/auth");
-
-//require("./config/passport")(passport);
+const isDev = require("./config/isDev");
+const ORIGIN_URL = isDev ? "http://localhost:3000" : "https://2604f884.project-grizzly.pages.dev";
 
 // Connect to database
 connectDB();
-
-// Handlebars: might wanna move this to client
-// app.engine(".hbs", exphbs.engine({ defaultLayout: "main", extname: ".hbs" }));
-// app.set("view engine", ".hbs");
-
-// Sessions
-// app.use(
-//   session({
-//     secret: "keyboard cat",
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-//   })
-// );
 
 app.use(
   cookieSession({
@@ -46,23 +28,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(function (req, res, next) {
-//   res.locals.user = req.user || null;
-//   next();
-// });
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept, authorization"
-//   );
-//   res.header("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
-//   next();
-// });
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ORIGIN_URL,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
