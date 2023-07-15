@@ -86,7 +86,7 @@ const Login = ({isDev}) => {
           </div>
           <div className="signup">
             Don't have an account?{" "}
-            <a href="http://localhost:3000/signup">Sign up!</a>
+            <a href="/signup">Sign up!</a>
           </div>
         </div>
       </div>
