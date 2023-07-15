@@ -2,6 +2,8 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../mutations/userMutations";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../style/newlogin.css"
+import { ADD_FOLDER } from "../mutations/folderMutations";
 
 const Signup = () => {
 
@@ -14,6 +16,10 @@ const Signup = () => {
     const [addUser] = useMutation(ADD_USER, {
         variables: { authId : username, password : password, displayName : username, },
     });
+    // const [addFolder] = useMutation(ADD_FOLDER, {
+    //     variables: { name: "home", userId: "", subFolders: [], notes: [] }
+    // });
+
     
     const registerUser = (e) => {
         if(password !== passwordCheck){
@@ -42,8 +48,8 @@ const Signup = () => {
     return (
         <div className="login">
         <h1 className="loginTitle">Sign Up</h1>
-        <div className="wrapper">
-            <div className="d-flex flex-column align-items-center justify-content-center">
+        <div className="right" style={{ width: "320px", flex: "0"}}>
+            <div className="d-flex flex-column" style={{ gap: "16px"}}>
             <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
             <input type="password" placeholder="Re-enter Password" value={passwordCheck} onChange={(e) => setPasswordCheck(e.target.value)}/>

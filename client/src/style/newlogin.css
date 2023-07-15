@@ -14,8 +14,10 @@
 }
 
 .wrapper {
-    width: 100%;
-    max-width: 320px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
 }
 
 .left,
@@ -100,56 +102,95 @@ input:focus {
   outline: none;
 }
 
+.signup-wrapper input,
 .right input {
   padding: 12px 0px;
   border: none;
-  border-bottom: 1px solid rgb(210, 210, 210);
+  border-bottom: 2px solid rgb(210, 210, 210);
+  transition: border-bottom 0.2s;
 }
 
-input:focus {
-  border-bottom: 1px solid black;
+.right input:focus {
+  border-bottom: 2px solid black;
 }
 
 .signup {
   text-align: center;
 }
 
-/* @media screen and (max-width: 992px) {
-  .login {
-    display: flex;
-    flex-direction: column;
-  }
-  .card {
-    width: 100%;
-    margin-bottom: 50px;
-  }
+/* wide screen */
+@media screen and (min-width: 992px) {
 
   .wrapper {
-    width: 65%;
-    height: 90%;
-    flex-direction: column;
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
   }
 
-  .loginTitle {
-    display: none;
+  .left,
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
   }
 
   .center {
-    width: 100%;
-    height: 1px;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
   }
 
-  .left {
-    padding: 20px;
-  }
-
-  .right {
-    padding: 20px;
+  .or {
+    padding: 10px;
+    color: gray;
+    background-color: white;
+    font-size: 0.75em;
   }
 
   .line {
-    height: 0.5px;
-    width: 300px;
+    height: 100%;
+    width: 0.5px;
+    background-color: lightgray;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* z-index: -1; */
   }
-} */
+
+  .loginButton {
+    height: 48px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    color: white;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .loginButton img {
+    height: 24px;
+  }
+
+  .submit {
+    background-color: black;
+    color: white;
+    border-radius: 8px;
+    padding: 12px;
+    height: 48px;
+    margin: 24px 0px 0px;
+  }
+}

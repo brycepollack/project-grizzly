@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MdDocumentScanner, MdEditDocument } from "react-icons/md";
 import file from "../img/feature-file.png";
 import login from "../img/feature-login.png"
+import sidebar from "../img/feature-sidebar.png"
 
 export default function Landing() {
   const [preview, setPreview] = useState(false);
@@ -82,20 +83,8 @@ export default function Landing() {
           </div>
         </div>
 
-        <h2 style={{ marginTop: "120px" }}>Features</h2>
+        <h2 style={{ marginTop: "120px" }}>Features!</h2>
         <div className="feature-half">
-          {/* <div className="feature">
-              <p>Easy account creation</p>
-              <img src={placeholder} style={{ width:"100%"}} />
-            </div>
-            <div className="feature">
-              <p>File system</p>
-              <img src={placeholder} style={{ width:"100%"}} />
-            </div>
-            <div className="feature">
-              <p>Switch between modes</p>
-              <img src={placeholder} style={{ width:"100%"}} />
-            </div> */}
 
           <div className="feature">
             <div className="feature-text">
@@ -113,9 +102,20 @@ export default function Landing() {
             </div>
             <div className="feature-text">
               <h3>File system</h3>
-              <p>Easy organization of notes with directories and subdirectories.</p>
+              <p>Organize notes with directories and subdirectories!</p>
             </div>
           </div>
+
+          <div className="feature">
+            <div className="feature-text">
+              <h3>Sidebar</h3>
+              <p>Jump to files, folders, or make new ones from the sidebar while editing!</p>
+            </div>
+            <div style={{ flex: "6"}}>
+              <img src={sidebar} style={{ width: "100%" }} />
+            </div>
+          </div>
+
         </div>
       </div>
       <div id="footer">

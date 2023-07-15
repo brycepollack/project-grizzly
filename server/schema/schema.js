@@ -172,6 +172,7 @@ const mutation = new GraphQLObjectType({
           authId: args.authId,
           password: hashedPassword,
           displayName: args.displayName,
+          homeFolder: null
         });
 
         try {
@@ -179,7 +180,20 @@ const mutation = new GraphQLObjectType({
           if (user) {
             return null
           } else {
-            return newuser.save();
+            // return newuser.save();
+            const savedUser = await newuser.save();
+            const newFolder = new Folder({
+              userId: savedUser._id,
+              name: "home",
+              subfolders: [],
+              notes: []
+            });
+            const savedFolder = await newFolder.save();
+            console.log("savedFolder")
+            console.log(savedFolder);
+            savedUser.homeFolder = savedFolder._id;
+            savedUser.save();
+            return savedUser;
           }
         } catch (err) {
           console.error(err);
