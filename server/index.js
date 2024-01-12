@@ -17,12 +17,19 @@ console.log("Origin: " + ORIGIN_URL);
 // Connect to database
 connectDB();
 
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["lama"],
+    maxAge: 24 * 60 * 60 * 100,
+  })
+);
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log('Custom middleware');
   next();
 });
 
