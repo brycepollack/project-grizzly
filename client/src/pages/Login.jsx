@@ -7,10 +7,12 @@ const Login = ({isDev}) => {
 
   const API_BASE_URL = isDev ? 'http://localhost:8080' : 'https://grizzly.fly.dev';
   //const API_BASE_URL = 'http://localhost:8080';
-  console.log("LOGIN api base url: " + API_BASE_URL)
+  // console.log("LOGIN api base url: " + API_BASE_URL)
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  window.localStorage.setItem("test", "i am test");
 
   const google = () => {
     window.open(API_BASE_URL + "/auth/google", "_self");

@@ -81,10 +81,12 @@ const App = () => {
         },
       })
         .then((response) => {
+          // console.log(response)
           if (response.status === 200) return response.json();
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
+          // console.log(resObject)
           setUser(resObject.user);
 
           // for persistence
