@@ -12,8 +12,6 @@ const Login = ({isDev}) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  window.localStorage.setItem("test", "i am test");
-
   const google = () => {
     window.open(API_BASE_URL + "/auth/google", "_self");
   };

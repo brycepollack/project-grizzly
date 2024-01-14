@@ -13,13 +13,19 @@ router.get("/login/failed", (req, res) => {
 router.get("/login/success", (req, res) => {
   // console.log(req);
   if (req.user) {
-    res.status(200).json({
+    res.status(200).header('Connection','close').json({
       success: true,
       message: "successful",
       user: req.user,
       //   cookies: req.cookies
     });
-    
+  }
+  else {
+    res.status(401).header('Connection','close').json({
+      success: false,
+      message: "failure",
+      user: null,
+    })
   }
 });
 
