@@ -21,6 +21,9 @@ app.use(
   cookieSession({
     name: "session",
     keys: ["lama"],
+    httpOnly: true,
+    sameSite: isDev ? false: 'none',
+    secure: isDev ? false : true,
     maxAge: 24 * 60 * 60 * 100,
   })
 );
@@ -54,6 +57,6 @@ app.use(
 
 app.use("/auth", authRoutes);
 
-app.enable("trust proxy");
+app.enable('trust proxy')
 
 app.listen(port, console.log(`Server running on port ${port}`));
